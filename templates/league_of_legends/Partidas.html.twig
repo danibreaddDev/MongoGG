@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block title %}Partidas
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuLeagueOfLegends.html.twig' %}
+	{% for partida in partidas %}
+		<div class="container mt-5">
+		{% set resultado = partida.info.gameDuration / 60 %}
+		<h3 class="text-white">{{partida.info.gameMode}} - {{ resultado | round }}min</h3>
+			<div class="row">
+				<div class="col-md-6">
+					<table class="table table-dark table-bordered">
+						<thead>
+							<tr>
+								<th>Nombre de Invocador</th>
+								<th>Campeon</th>
+								<th></th>
+								<th>Posicion</th>
+								<th>K/D/A</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for participant in partida.info.participants|slice(0, 5) %}
+								<tr class="{% if participant.win %}table-success{% else %}table-danger{% endif %}">
+									<td class="fw-bold">{{ participant.riotIdGameName }}-{{ participant.riotIdTagline }}</td>
+									<td class="fw-bold">{{ participant.championName }}</td>
+									<td>
+										<img src="https://ddragon.leagueoflegends.com/cdn/14.6.1/img/champion/{{ participant.championName }}.png" class="img-fluid rounded" style="max-width: 75px; max-height: 75px;" alt="{{ participant.championName }}">
+									</td>
+									<td class="fw-bold">{{ participant.teamPosition }}</td>
+									<td class="fw-bold">{{ participant.kills }}/{{ participant.deaths }}/{{ participant.assists }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="col-md-6">
+					<table class="table table-dark table-bordered">
+						<thead>
+							<tr>
+								<th>Nombre de Invocador</th>
+								<th>Campeon</th>
+								<th></th>
+								<th>Posicion</th>
+								<th>K/D/A</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for participant in partida.info.participants|slice(5, 5) %}
+								<tr class="{% if participant.win %}table-success{% else %}table-danger{% endif %}">
+									<td class="fw-bold">{{ participant.riotIdGameName }}-{{ participant.riotIdTagline }}</td>
+									<td class="fw-bold">{{ participant.championName }}</td>
+									<td>
+										<img src="https://ddragon.leagueoflegends.com/cdn/14.6.1/img/champion/{{ participant.championName }}.png" class="img-fluid rounded" style="max-width: 75px; max-height: 75px;" alt="{{ participant.championName }}">
+									</td>
+									<td class="fw-bold">{{ participant.teamPosition }}</td>
+									<td class="fw-bold">{{ participant.kills }}/{{ participant.deaths }}/{{ participant.assists }}</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

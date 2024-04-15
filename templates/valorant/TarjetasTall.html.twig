@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for tarjeta in tarjetas %}
+        <div class="col">
+            <div class="card h-100 bg-dark">
+                <img src="{{ tarjeta.largeArt }}" class="card-img-top" alt="{{ tarjeta.displayName }}">
+                <div class="card-body text-center p-2 rounded">
+                    <h5 class="card-title text-white">{{ tarjeta.displayName }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

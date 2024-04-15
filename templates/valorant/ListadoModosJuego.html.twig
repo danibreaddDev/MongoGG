@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - Modos De Juego
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuValorant.html.twig' %}
+	<div class="container mt-4 text-center">
+		<h1 class="mb-4 text-white">GameModes - Valorant</h1>
+		<div
+			class="row row-cols-1 row-cols-md-4">
+			{# Cambiado a 4 columnas #}
+			{% for modo in modos %}
+				{% if modo.displayIcon is not null %}
+					<div class="col mb-4">
+						<div class="card bg-dark text-white">
+							<img src="{{ modo.displayIcon }}" alt="{{ modo.displayName }}" class="mt-3 mx-auto d-block" style="max-width: 100px; max-height: 100px;">
+							<div class="card-body text-center p-2 rounded">
+								<h5 class="card-title">{{ modo.displayName }}</h5>
+								<p class="card-text text-white">{{ modo.duration }}</p>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

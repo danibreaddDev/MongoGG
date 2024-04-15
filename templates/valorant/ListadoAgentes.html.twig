@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - Agentes
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		/* Fondo del contenedor */
+		.container {
+			background-color: #0e141b;
+			padding: 20px; /* Espaciado interno */
+			border-radius: 10px; /* Bordes redondeados */
+		}
+
+		/* Estilos para el contenedor de las habilidades */
+		.ability-container {
+			background-color: #0e141b !important;
+			border-radius: 10px; /* Bordes redondeados */
+		}
+
+		/* Estilos para los enlaces */
+		.nav-link {
+			color: #FFFFFF !important; /* Color del texto */
+		}
+
+		/* Estilos para los títulos */
+		.card-title,
+		h2,
+		h3 {
+			color: #FFD700 !important; /* Color del texto */
+		}
+
+		/* Estilos para el texto */
+		.card-text {
+			color: #FFFFFF !important; /* Color del texto */
+		}
+		.ability-container {
+			color: #FFFFFF !important;
+
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuValorant.html.twig' %}
+	<div class="container text-center">
+		<ul class="nav nav-pills">
+			{% for agente in agentes %}
+				{% if agente.isPlayableCharacter %}
+					<li class="nav-item">
+						<a class="nav-link" href="#{{ agente.displayName|lower }}">
+							<img src="{{ agente.displayIconSmall }}" style="height: 24px; width: 24px;" class="mr-2" alt="{{ agente.displayName }}">
+							{{ agente.displayName }}
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+		{% for agente in agentes %}
+			<div id="{{ agente.displayName|lower }}" class="row mt-5">
+				{% if agente.isPlayableCharacter %}
+					<div class="col-md-12 mt-5">
+						<div class="row g-0">
+							<div class="col-md-4">
+								<img src="{{ agente.bustPortrait }}" class="img-fluid rounded-start" alt="{{ agente.displayName }}">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h2 class="card-title">{{ agente.displayName }}</h2>
+									<p class="card-text">{{ agente.description }}</p>
+									<p class="card-text">
+										<strong>Role:</strong>
+										{{ agente.role.displayName }}
+										<img src="{{ agente.role.displayIcon }}" class="img-fluid" alt="{{ agente.role.displayName }}" style="height: 20px; width: 20px;">
+									</p>
+									<p class="card-text">
+										<strong>Role Description:</strong>
+										{{ agente.role.description }}
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="row mt-3">
+							<div class="col-md-12">
+								<h3>Abilities</h3>
+								<ul class="list-group-flush ability-container">
+									{% for ability in agente.abilities %}
+										<li class="list-group-item">
+											<img src="{{ ability.displayIcon }}" style="height: 20px; width: 20px; margin-right: 5px;" alt="{{ ability.displayName }}">
+											<strong>{{ ability.displayName }}</strong>
+											-
+											{{ ability.description }}
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+            <hr class="my-4" style="border-color: #FF5733; border-width: 3px;">
+		{% endfor %}
+	</div>
+{% endblock %}

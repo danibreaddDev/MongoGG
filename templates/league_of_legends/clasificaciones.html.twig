@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+{% block title %}Clasificaciones
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuLeagueOfLegends.html.twig' %}
+	<div class="container mt-5">
+		<form id="search-form" method="GET" action="{{ path('app_league_of_legends_clasificaciones_filtradas') }}">
+			<div class="row justify-content-center">
+				<div class="col-md-4">
+					<select id="tier-select" name="tier-select" class="form-select" aria-label="Campeones">
+						<option selected>Selecciona una tier</option>
+						<option value="CHALLENGER">Challenger</option>
+						<option value="GRANDMASTER">GranMaster</option>
+						<option value="MASTER">Master</option>
+						<option value="DIAMOND">Diamante</option>
+						<option value="EMERALD">Esmeralda</option>
+						<option value="PLATINUM">Platino</option>
+						<option value="GOLD">Oro</option>
+						<option value="SILVER">Plata</option>
+						<option value="BRONZE">Bronce</option>
+						<option value="IRON">Hierro</option>
+						<!-- Agrega más opciones según sea necesario -->
+					</select>
+				</div>
+				<div class="col-md-4">
+					<select id="division-select" disabled name="division-select" class="form-select" aria-label="Contenedor 1">
+						<option selected>Selecciona una división</option>
+						<option value="I">I</option>
+						<option value="II">II</option>
+						<option value="III">III</option>
+						<option value="IV">IV</option>
+						<!-- Agrega más opciones según sea necesario -->
+					</select>
+				</div>
+				<div class="col-md-4">
+					<select id="queue-select" name="queue-select" class="form-select" aria-label="Contenedor 2">
+						<option selected>Selecciona tipo de clasificatoria</option>
+						<option value="RANKED_SOLO_5x5">Ranked SoloQ</option>
+						<option value="RANKED_FLEX_SR">Ranked Flex 5vs5</option>
+						<!-- Agrega más opciones según sea necesario -->
+					</select>
+				</div>
+			</div>
+			<div class="row mt-3 justify-content-center">
+				<div class="col-md-1 text-md-end">
+					<button type="submit" id="search-button" class="btn btn-primary">Buscar</button>
+				</div>
+			</div>
+			<div id="result-container"></div>
+		{% endblock %}
+		{% block javascripts %}
+		<script>
+        const selectTier = document.getElementById('tier-select');
+        const selectDivision = document.getElementById('division-select');
+		const selectQueue = document.getElementById('queue-select');
+		
+        selectTier.addEventListener('change', function () {
+			console.log(selectTier.value);
+            if (selectTier.value === "CHALLENGER" || selectTier.value === "GRANDMASTER" || selectTier.value === "MASTER") {
+                selectDivision.disabled = true;
+				console.log(selectTier.value);
+                selectDivision.value = "I";
+				console.log(selectDivision.value);
+            } else {
+                selectDivision.disabled = false;
+				selectDivision.value = value.selected;
+				selectQueue.value = value.selected;
+            }
+        });
+    </script>
+			<script>
+				document.getElementById('search-form').addEventListener('submit', function (event) {
+event.preventDefault();
+
+// Obtener los valores seleccionados del formulario
+var formData = new FormData(this);
+
+// Realizar la solicitud AJAX
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '{{ path('app_league_of_legends_clasificaciones_filtradas') }}?' + new URLSearchParams(formData).toString(), true);
+xhr.onload = function () {
+if (xhr.status >= 200 && xhr.status < 400) { // La solicitud fue exitosa
+var data = xhr.responseText;
+
+// Actualizar el contenido del contenedor con el contenido de la vista externa
+document.getElementById('result-container').innerHTML = data;
+} else { // Manejar errores
+console.error('Error en la solicitud AJAX');
+}
+};
+xhr.send();
+});
+			</script>
+
+		{% endblock %}

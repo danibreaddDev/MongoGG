@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - Mapas{% endblock %}
+
+{% block body %}
+{% include 'comunes/_menuValorant.html.twig' %}
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col">
+            <div id="mapCarouselTop" class="carousel slide mb-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for mapa in mapas %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+                            <img src="{{mapa.splash}}" class="d-block" style="max-height: 100%; max-width: 100%;" alt="{{mapa.displayName}}">
+                        </div>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h2>{{mapa.displayName}}</h2>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mapCarouselTop" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mapCarouselTop" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div id="mapCarouselBottom" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for mapa in mapas %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 500px;">
+                            <img src="{{mapa.displayIcon}}" class="d-block" style="max-height: 100%; max-width: 100%; height: auto;" alt="{{mapa.displayName}}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mapCarouselBottom" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mapCarouselBottom" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        $('#mapCarouselTop').on('slid.bs.carousel', function () {
+            var index = $(this).find('.carousel-item.active').index();
+            $('#mapCarouselBottom').carousel(index);
+        });
+        $('#mapCarouselBottom').on('slid.bs.carousel', function () {
+            var index = $(this).find('.carousel-item.active').index();
+            $('#mapCarouselTop').carousel(index);
+        });
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

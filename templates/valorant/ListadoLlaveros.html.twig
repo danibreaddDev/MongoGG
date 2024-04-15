@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - Llaveros{% endblock %}
+
+{% block body %}
+    {% include 'comunes/_menuValorant.html.twig' %}
+    
+    <div class="container mt-4 text-center">
+        <h1 class="mb-4 text-white">Llaveros - Valorant</h1>
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-6">
+            {% for llavero in llaveros %}
+                <div class="col mb-4">
+                    <div class="card bg-dark text-white" style="width: 9.3rem;">
+                        <img src="{{ llavero.displayIcon }}" alt="{{ llavero.displayName }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100px; max-height: 100px;">
+                        <div class="card-body text-center p-2 rounded">
+                            <h5 class="card-title">{{ llavero.displayName }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+
+

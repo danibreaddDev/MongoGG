@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LOL Tracker
+{% endblock %}
+{% block stylesheets %}
+    <style>
+        .navbar {
+            background-color: #1b2632 !important; /* Color de fondo de la barra de navegación */
+            color: #ffffff;
+        }
+		.nav-link{
+			color: #FFFFFF !important;
+		}
+    </style>
+{% endblock %}
+
+{% block body %}
+ <nav class="navbar navbar-expand-lg navbar-light bg-ligth">
+        <div class="container-fluid"> <!-- Agrega la clase container-fluid aquí -->
+            <a class="navbar-brand brand-small text-white" href="{{ path('app_main') }}">MongoGG</a>
+           
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+				 <a class="nav-link m-3" href="{{ path('app_league_of_legends') }}">League Of Legends</a>
+                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_campeones') }}">Listado de Campeones</a>
+                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_campeones_rotacion') }}">Listado de Campeones En Rotacion</a>
+                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_clasificaciones') }}">Clasificaciones</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

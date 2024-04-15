@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant Tracker
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuValorant.html.twig' %}
+	<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+		<div class="container text-center">
+			<h2 class="mb-2 text-white">Busca tu nombre</h2>
+			{% include 'comunes/_BarraBusqueda.html.twig' %}
+		</div>
+	</div>
+
+{% endblock %}

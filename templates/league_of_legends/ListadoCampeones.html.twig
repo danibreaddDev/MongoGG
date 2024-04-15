@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}Listado de Campeones{% endblock %}
+
+{% block body %}
+    {% include 'comunes/_menuLeagueOfLegends.html.twig' %}
+    <div class="container mt-4 text-center">
+        <h1 class="mb-4 text-white">Listado de Campeones - League of Legends</h1>
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5">
+            {% for campeon in campeones %}
+                <div class="col mb-4">
+                    <div class="card bg-dark text-white" style="width: 9.3rem;">
+                        <img src="https://ddragon.leagueoflegends.com/cdn/14.6.1/img/champion/{{ campeon }}.png" alt="{{ campeon }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100px; max-height: 100px;">
+                        <div class="card-body text-center p-2 rounded">
+                            <h5 class="card-title">{{ campeon }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

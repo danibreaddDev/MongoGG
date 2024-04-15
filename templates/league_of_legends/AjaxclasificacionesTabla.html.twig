@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-5 text-center">
+    <h3 class="display-4 mt-5 mb-4 text-white">Top 10 Jugadores por Liga - <img src="https://opgg-static.akamaized.net/images/medals_mini/{{ tablaclasificaciones[0].tier | lower }}.png" alt="clasifacion icon" class="icon" style="width:50px; heigth:50px;"/></h3>
+    
+    <div class="table-responsive"> <!-- Para hacer la tabla responsive en dispositivos pequeños -->
+        <table class="table table-dark table-striped table-hover"> <!-- Añadir estilos de Bootstrap -->
+            <thead class="thead-dark"> <!-- Añadir color de fondo oscuro al encabezado -->
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tier</th>
+                    <th scope="col">División</th>
+                    <th scope="col">Puntos</th>
+                    <th scope="col">Victorias</th>
+                    <th scope="col">Derrotas</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% set clasificacionesOrdenados = tablaclasificaciones | sort((a,b)=> b.leaguePoints - a.leaguePoints) %}
+               {% for index, clasificacion in clasificacionesOrdenados %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th> <!-- Utilizar loop.index para el número de fila -->
+                        <td>{{ clasificacion.gameName }}#{{clasificacion.tagLine}}</td>
+                        <td>{{ clasificacion.tier }}</td>
+                        <td>{{ clasificacion.rank }}</td>
+                        <td>{{ clasificacion.leaguePoints }}</td>
+                        <td>{{ clasificacion.wins }}</td>
+                        <td>{{ clasificacion.losses }}</td>
+                    </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

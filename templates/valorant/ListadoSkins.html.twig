@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - Skins
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/_menuValorant.html.twig' %}
+	<div class="container mt-4 text-center">
+	<h1 class="mb-4 text-white">Weapons - Valorant</h1>
+		<div class="row">
+			{% for skin in skins %}
+				<div class="col-md-4 mb-4">
+					<div class="card bg-dark text-white">
+						<img src="{{ skin.displayIcon }}" class="card-img-top" alt="{{ skin.displayName }}" style="max-height: 400px;">
+						<div class="card-body">
+							<h5 class="card-title">{{ skin.displayName }}</h5>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
