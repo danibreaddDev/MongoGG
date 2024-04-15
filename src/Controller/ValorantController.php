@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Service\ValorantApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 class ValorantController extends AbstractController
@@ -109,4 +110,19 @@ class ValorantController extends AbstractController
             'modos' => $infoModos,
         ]);
     }
+    #[Route('/valorant/jugador/', name: 'app_valorant_jugador')]
+    public function getInfoSummoner(Request $request): Response
+    {
+        $name = $request->query->get('name');
+        $tag = $request->query->get('tag');
+        $this->ValorantApi->setName($name);
+        $this->ValorantApi->setTag($tag);
+        $infoJugador = $this->ValorantApi->getinfoJugador($this->ValorantApi->getName(), $this->ValorantApi->getTag());
+
+        //recuperar la info
+        return $this->render('valorant/Jugador.html.twig', [
+            'jugador' => $infoJugador,
+        ]);
+    }
+    
 }
