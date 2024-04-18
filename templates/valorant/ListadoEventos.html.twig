@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+{% block body %}
+    <div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
+    
+    <div class="container mt-4 text-center">
+
+        {% set eventos_sorted = eventos|sort((a, b) => a.startTime > b.startTime) %}
+
+        <div class="row">
+            {% for evento in eventos_sorted %}
+                <div class="col-md-6">
+                    <div class="card bg-dark text-white mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">{{ evento.displayName }}</h5>
+                            {% set startDate = evento.startTime|split('T')[0] %}
+                            {% set endDate = evento.endTime|split('T')[0] %}
+                            <p class="card-text text-white">Start: {{ startDate }} - End: {{ endDate }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -11,43 +11,14 @@ class ValorantApiService
 {
 
     private $httpClient;
-    private $apiKey;
-    private $name;
-    private $tag;
 
-    public function __construct(HttpClientInterface $httpClient, string $apiKey, string $name, string $tag)
+    public function __construct(HttpClientInterface $httpClient)
     {
         $this->httpClient = $httpClient;
-        $this->apiKey = $apiKey;
-        $this->name = $name;
-        $this->tag = $tag;
-    }
-    // Setter para name
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    // Getter para name
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    // Setter para tag
-    public function setTag($tag)
-    {
-        $this->tag = $tag;
-    }
-
-    // Getter para tag
-    public function getTag()
-    {
-        return $this->tag;
     }
     public function getListAgentes(): array
     {
-        //$url = "https://eu.api.riotgames.com/val/content/v1/contents" . "?api_key=" . $this->apiKey;
+        
         $url = "https://valorant-api.com/v1/agents";
         $response = $this->httpClient->request('GET', $url);
         $data = $response->toArray();
@@ -56,7 +27,6 @@ class ValorantApiService
     }
     public function getListMapas(): array
     {
-        //$url = "https://eu.api.riotgames.com/val/content/v1/contents" . "?api_key=" . $this->apiKey;
         $url = "https://valorant-api.com/v1/maps";
         $response = $this->httpClient->request('GET', $url);
         $data = $response->toArray();
@@ -70,6 +40,13 @@ class ValorantApiService
         $armas = $data["data"];
         return $armas;
 
+    }
+    public function getEscudos(): array{
+        $url = "https://valorant-api.com/v1/gear";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $escudos = $data["data"];
+        return $escudos;
     }
     public function getLlaveros(): array
     {
@@ -118,4 +95,69 @@ class ValorantApiService
         $rangos = $data["data"];
         return $rangos;
     }
+    public function getCeremonias(): array{
+        $url = "https://valorant-api.com/v1/ceremonies";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $ceremonias = $data["data"];
+        return $ceremonias;
+    }
+    public function getStrangeSkins(): array{
+        $url = "https://valorant-api.com/v1/contenttiers";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $contenido = $data["data"];
+        return $contenido;
+    }
+    public function getContratos(): array{
+        $url = "https://valorant-api.com/v1/contracts";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $contratos = $data["data"];
+        return $contratos;
+    }
+    public function getMonedas(): array{
+        $url = "https://valorant-api.com/v1/currencies";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $monedas = $data["data"];
+        return $monedas;
+    }
+    public function getEventos(): array{
+        $url = "https://valorant-api.com/v1/events";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $eventos = $data["data"];
+        return $eventos;
+    }
+
+    public function getBordesNivel(): array{
+        $url = "https://valorant-api.com/v1/levelborders";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $bordes = $data["data"];
+        return $bordes;
+    }
+    public function getTitulos(): array{
+        $url = "https://valorant-api.com/v1/playertitles";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $titulos = $data["data"];
+        return $titulos;
+    }
+    public function getTemporadas(): array{
+        $url = "https://valorant-api.com/v1/seasons/competitive";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $temporadas = $data["data"];
+        return $temporadas;
+    }
+    public function getTemas(): array{
+        $url = "https://valorant-api.com/v1/themes";
+        $response = $this->httpClient->request('GET', $url);
+        $data = $response->toArray();
+        $temas = $data["data"];
+        return $temas;
+    }
+    
 }

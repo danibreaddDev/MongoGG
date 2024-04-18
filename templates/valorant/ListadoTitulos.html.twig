@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
+    
+    <div class="container mt-4 text-center">
+    <h1 class="text-white">TITLES</h1>
+        <div class="row mt-5">
+            {% for titulo in titulos %}
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-dark text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ titulo.displayName }}</h5>
+                            <p class="card-text">IN GAME: {{ titulo.titleText }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

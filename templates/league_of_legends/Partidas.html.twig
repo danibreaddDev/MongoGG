@@ -3,10 +3,12 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'comunes/_menuLeagueOfLegends.html.twig' %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
+	</div>
 	{% for partida in partidas %}
 		<div class="container mt-5">
-		{% set resultado = partida.info.gameDuration / 60 %}
+		{% set resultado = partida.info.gameDuration / 60 %}	
 		<h3 class="text-white">{{partida.info.gameMode}} - {{ resultado | round }}min</h3>
 			<div class="row">
 				<div class="col-md-6">

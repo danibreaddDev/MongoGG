@@ -43,7 +43,9 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'comunes/_menuValorant.html.twig' %}
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
 	<div class="container text-center">
 		<ul class="nav nav-pills">
 			{% for agente in agentes %}
@@ -99,7 +101,7 @@
 					</div>
 				{% endif %}
 			</div>
-            <hr class="my-4" style="border-color: #FF5733; border-width: 3px;">
+			<hr class="my-4" style="border-color: #FF5733; border-width: 3px;">
 		{% endfor %}
 	</div>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valorant - COMPETITIVE TIERS{% endblock %}
+
+{% block body %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
+    
+    <div class="container mt-4 text-center">
+        <h1 class="mb-4 text-white">COMPETITIVE TIERS - Valorant</h1>
+
+        <div class="row justify-content-center">
+            {% for rango in rangos %}
+                {% if loop.last %}
+                    {% if rango.tiers is iterable %}
+                        {% for item in rango.tiers %}
+                            {% if item.tierName != "UNRANKED" and item.tierName != "Unused1" and item.tierName != "Unused2" %}
+                                <div class="col-md-2 mb-4 d-flex justify-content-center">
+                                    <div class="card bg-dark text-white" style="width: 10rem;">
+                                        <img src="{{ item.smallIcon }}" class="card-img-top mt-2 mx-auto d-block" style="max-width: 50px; max-height: 50px;">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-white">{{ item.tierName }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+

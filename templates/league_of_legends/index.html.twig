@@ -2,15 +2,28 @@
 
 {% block title %}LOL Tracker
 {% endblock %}
-
-{% block body %}
-	{% include 'comunes/_menuLeagueOfLegends.html.twig'%}
-    
-	<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-    <div class="container text-center">
-        <h2 class="mt-0 text-white">Busca tu nombre de invocador</h2>
-        {% include 'comunes/_BarraBusqueda.html.twig' %}
-    </div>
-</div>
+{% block stylesheets %}
+	<style></style>
 {% endblock %}
 
+{% block body %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_main') }}">Return</a>
+	</div>
+<div class="container mt-4 text-center text-white">
+    <div class="row">
+        <div class="d-flex flex-wrap justify-content-center">
+			<h1 class="text-white">LEAGUE OF LEGENDS</h1>
+			<img src="{{ asset('images/lol.svg') }}" alt="icono" class="img-fluid ms-3" style="width:30px; heigth:30px;"/>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'comunes/_menuLeagueOfLegends.html.twig'%}
+        </div>
+        <div class="col-md-6">
+            {% include 'comunes/_BarraBusqueda.html.twig'%}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

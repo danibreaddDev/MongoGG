@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
+    <div class="container mt-4 text-center">
+    <h1 class="text-white">CURRENCIES</h1>
+        <div class="row mt-5 justify-content-center">
+            {% for moneda in monedas %}
+                <div class="col-md-2 mb-4">
+                    <div class="card bg-dark text-white">
+                        <img src="{{ moneda.displayIcon }}" class="card-img-top mt-2 mx-auto d-block" alt="{{ moneda.largeIcon }}" style="max-width: 100px; max-height: 100px;">
+                        <div class="card-body">
+                            <p class="card-title text-white">{{ moneda.displayName }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

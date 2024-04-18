@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Valorant Tracker
+{% block title %}Valorant
 {% endblock %}
-
 {% block body %}
-	{% include 'comunes/_menuValorant.html.twig' %}
-	<div class="container-fluid d-flex justify-content-center align-items-center vh-100">
-		<div class="container text-center">
-		</div>
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_main') }}">Return</a>
 	</div>
+	{% include 'comunes/_MenuValorantPaneles.html.twig' %}
 {% endblock %}

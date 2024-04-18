@@ -3,34 +3,62 @@
 {% block title %}LOL Tracker
 {% endblock %}
 {% block stylesheets %}
-    <style>
-        .navbar {
-            background-color: #1b2632 !important; /* Color de fondo de la barra de navegación */
-            color: #ffffff;
-        }
-		.nav-link{
-			color: #FFFFFF !important;
+	<style>
+		.card-link {
+			color: inherit; /* Mantener el color de texto original */
+			text-decoration: none; /* Quitar subrayado */
+			cursor: pointer; /* Cambiar cursor al puntero al pasar sobre el enlace */
+
 		}
-    </style>
+		@keyframes slideIn {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Aplica la animación a la clase card-body */
+		.card-body {
+			animation: slideIn 0.5s ease-out;
+			transition: transform 0.2s ease-out;
+		}
+		.card-body:hover {
+			transform: translatex(10px);
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
- <nav class="navbar navbar-expand-lg navbar-light bg-ligth">
-        <div class="container-fluid"> <!-- Agrega la clase container-fluid aquí -->
-            <a class="navbar-brand brand-small text-white" href="{{ path('app_main') }}">MongoGG</a>
-           
+	<div class="pt-5 mt-5">
+		<div class="card-body mb-5" style="width:30rem;">
+			<a href="{{ path('app_league_of_legends_campeones') }}" class="card-link">
+				<div class="d-flex flex-column bg-dark rounded">
+					<h1 class="card-text text-white">Champions List</h1>
+					<img src="{{asset('images/monster.png')}}" alt="icono" class="img-fluid mx-auto"/>
+				</div>
+			</a>
+		</div>
+		<div class="card-body bg-dark rounded mb-5" style="width:30rem;">
+			<a href="{{ path('app_league_of_legends_campeones_rotacion') }}" class="card-link">
+				<div class="d-flex flex-column">
+					<h1 class="card-text text-white">Rotate Champions List</h1>
+					<img src="{{asset('images/week.png')}}" alt="icono" class="img-fluid mx-auto"/>
+				</div>
+			</a>
+		</div>
+		<div class="card-body bg-dark rounded mb-5" style="width:30rem;">
+			<a href="{{ path('app_league_of_legends_clasificaciones') }}" class="card-link">
+				<div class="d-flex flex-column">
+					<h1 class="card-text text-white">Tier Rank</h1>
+					<img src="{{asset('images/tiers.png')}}" alt="icono" class="img-fluid mx-auto"/>
+				</div>
+			</a>
+		</div>
+	</div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-				 <a class="nav-link m-3" href="{{ path('app_league_of_legends') }}">League Of Legends</a>
-                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_campeones') }}">Listado de Campeones</a>
-                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_campeones_rotacion') }}">Listado de Campeones En Rotacion</a>
-                    <a class="nav-link m-3" href="{{ path('app_league_of_legends_clasificaciones') }}">Clasificaciones</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+
 {% endblock %}

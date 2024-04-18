@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}VALORANT
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		* {
+			margin=0;
+			padding=0;
+		}
+		.navbar {
+			background-color: #1b2632 !important; /* Color de fondo de la barra de navegación */
+			color: #ffffff;
+		}
+		.nav-link {
+			color: #FFFFFF !important;
+		}
+		.card-link {
+			color: inherit; /* Mantener el color de texto original */
+			text-decoration: none; /* Quitar subrayado */
+			cursor: pointer; /* Cambiar cursor al puntero al pasar sobre el enlace */
+
+		}
+		@keyframes slideIn {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Aplica la animación a la clase card-body */
+		.card-body {
+			animation: slideIn 0.5s ease-out;
+			transition: transform 0.2s ease-out;
+		}
+		.card-body:hover {
+			transform: translateY(-10px);
+		}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-4 text-center">
+		<div class="d-flex flex-wrap justify-content-center">
+			<h1 class="text-white">VALORANT</h1>
+			<img src="{{ asset('images/logoValorant.svg') }}" alt="icono" class="img-fluid ms-3" style="width:30px; heigth:30px;"/>
+			<div>
+
+				<div class="d-flex flex-wrap justify-content-center mt-5">
+					<div class="col-md-3 mt-2 mb-3">
+						<div class="card-body mx-3 mb-2 bg-dark rounded">
+							<a href="{{ path('app_valorant_agentes') }}" class="card-link">
+								<h1 class="card-text text-white">Agents</h1>
+								<img src="{{asset('images/agents.png')}}" alt="icono" class="img-fluid mx-auto"/>
+							</div>
+						</div>
+						<div class="col-md-3 mt-2 mb-3">
+							<a href="{{ path('app_valorant_armas') }}" class="card-link">
+								<div class="card-body mx-3 mb-2 bg-dark rounded">
+									<h1 class="card-text text-white">Weapons</h1>
+									<img src="{{asset('images/weapon.png')}}" alt="icono" class="img-fluid mx-auto "/>
+								</div>
+							</div>
+							<div class="col-md-3 mt-2 mb-3">
+								<a href="{{ path('app_valorant_skins') }}" class="card-link">
+									<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+										<h1 class="card-text text-white">Skin Packs</h1>
+										<img src="{{asset('images/packs.png')}}" alt="icono" class="img-fluid mx-auto mb-2"/>
+									</div>
+								</div>
+								<div class="col-md-3 mt-2 mb-3">
+									<a href="{{ path('app_valorant_mapas') }}" class="card-link">
+										<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+											<h1 class="card-text text-white">Maps</h1>
+											<img src="{{asset('images/map.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+										</div>
+									</div>
+									<div class="col-md-3 mt-2 mb-3">
+										<a href="{{ path('app_valorant_tarjetas') }}" class="card-link">
+											<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+												<h1 class="card-text text-white">Player Cards</h1>
+												<img src="{{asset('images/cards.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+											</div>
+										</div>
+										<div class="col-md-3 mt-2 mb-3">
+											<a href="{{ path('app_valorant_llaveros') }}" class="card-link">
+												<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+													<h1 class="card-text text-white">Buddies</h1>
+													<img src="{{asset('images/buddie.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+												</div>
+											</div>
+											<div class="col-md-3 mt-2 mb-3">
+												<a href="{{ path('app_valorant_grafitis') }}" class="card-link">
+													<div class="card-body mx-3 mb-2 bg-dark rounded">
+														<h1 class="card-text text-white">Sprays</h1>
+														<img src="{{asset('images/spray.png')}}" alt="icono" class="img-fluid mx-auto "/>
+													</div>
+												</div>
+												<div class="col-md-3 mt-2 mb-3">
+													<a href="{{ path('app_valorant_modosJuego') }}" class="card-link">
+														<div class="card-body mx-3 mb-2 bg-dark rounded">
+															<h1 class="card-text text-white">Game Modes</h1>
+															<img src="{{asset('images/gamemode.png')}}" alt="icono" class="img-fluid mx-auto "/>
+														</div>
+													</div>
+													<div class="col-md-3 mt-2 mb-3">
+														<a href="{{ path('app_valorant_rangos') }}" class="card-link">
+															<div class="card-body mx-3 mb-2 bg-dark rounded">
+																<h1 class="card-text text-white">COMP. Tiers</h1>
+																<img src="{{asset('images/tiers.png')}}" alt="icono" class="img-fluid mx-auto "/>
+															</div>
+														</div>
+														<div class="col-md-3 mt-2 mb-3">
+															<a href="{{ path('app_valorant_nivelskins') }}" class="card-link">
+																<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																	<h1 class="card-text text-white">Level Skins</h1>
+																	<img src="{{asset('images/levelskin.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																</div>
+															</div>
+															<div class="col-md-3 mt-2 mb-3">
+																<a href="{{ path('app_valorant_events') }}" class="card-link">
+																	<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																		<h1 class="card-text text-white">Events</h1>
+																		<img src="{{asset('images/events.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																	</div>
+																</div>
+																<div class="col-md-3 mt-2 mb-3">
+																	<a href="{{ path('app_valorant_currencies') }}" class="card-link">
+																		<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																			<h1 class="card-text text-white">Currencies</h1>
+																			<img src="{{asset('images/currency.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																		</div>
+																	</div>
+																	<div class="col-md-3 mt-2 mb-3">
+																		<a href="{{ path('app_valorant_borders') }}" class="card-link">
+																			<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																				<h1 class="card-text text-white">Borders</h1>
+																				<img src="{{asset('images/borders.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																			</div>
+																		</div>
+																		<div class="col-md-3 mt-2 mb-3">
+																			<a href="{{ path('app_valorant_titles') }}" class="card-link">
+																				<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																					<h1 class="card-text text-white">Titles</h1>
+																					<img src="{{asset('images/titles.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																				</div>
+																			</div>
+																			<div class="col-md-3 mt-2 mb-3">
+																				<a href="{{ path('app_valorant_seasons') }}" class="card-link">
+																					<div class="card-body mx-3 mb-2 bg-dark rounded">
+
+																						<h1 class="card-text text-white">Season</h1>
+																						<img src="{{asset('images/season.png')}}" alt="icono" class="img-fluid mx-auto "/>
+
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	{% endblock %}

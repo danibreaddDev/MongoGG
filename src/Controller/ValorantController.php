@@ -42,8 +42,10 @@ class ValorantController extends AbstractController
     public function getListArmas(): Response
     {
         $infoArmas = $this->ValorantApi->getListArmas();
+        $infoEscudos = $this->ValorantApi->getEscudos();
         return $this->render('valorant/ListadoArmas.html.twig', [
             'armas' => $infoArmas,
+            'escudos' => $infoEscudos
         ]);
     }
     #[Route('/valorant/skins', name: 'app_valorant_skins')]
@@ -110,5 +112,68 @@ class ValorantController extends AbstractController
             'modos' => $infoModos,
         ]);
     }
-    
+    #[Route('/valorant/rangos', name: 'app_valorant_rangos')]
+    public function getRangos(): Response
+    {
+        $infoRangos = $this->ValorantApi->getRangos();
+        return $this->render('valorant/ListadoRangos.html.twig', [
+            'rangos' => $infoRangos,
+        ]);
+    }
+    #[Route('/valorant/ceremonias', name: 'app_valorant_ceremonias')]
+    public function getCeremonias(): Response
+    {
+        $infoceremonias = $this->ValorantApi->getCeremonias();
+        return $this->render('valorant/ListadoCeremonies.html.twig', [
+            'ceremonias' => $infoceremonias,
+        ]);
+    }
+    #[Route('/valorant/skinsLevel', name: 'app_valorant_nivelskins')]
+    public function getNivelSkins(): Response
+    {
+        $infocontenido = $this->ValorantApi->getStrangeSkins();
+        return $this->render('valorant/ListadoRarezaSkins.html.twig', [
+            'contenido' => $infocontenido,
+        ]);
+    }
+    #[Route('/valorant/currencies', name: 'app_valorant_currencies')]
+    public function getCurrencies(): Response
+    {
+        $infomonedas = $this->ValorantApi->getMonedas();
+        return $this->render('valorant/ListadoMoneda.html.twig', [
+            'monedas' => $infomonedas,
+        ]);
+    }
+    #[Route('/valorant/events', name: 'app_valorant_events')]
+    public function getEvents(): Response
+    {
+        $infoEventos = $this->ValorantApi->getEventos();
+        return $this->render('valorant/ListadoEventos.html.twig', [
+            'eventos' => $infoEventos,
+        ]);
+    }
+    #[Route('/valorant/borders', name: 'app_valorant_borders')]
+    public function getBorders(): Response
+    {
+        $infoBorders = $this->ValorantApi->getBordesNivel();
+        return $this->render('valorant/ListadoBordes.html.twig', [
+            'bordes' => $infoBorders,
+        ]);
+    }
+    #[Route('/valorant/titles', name: 'app_valorant_titles')]
+    public function getTitles(): Response
+    {
+        $infotitles = $this->ValorantApi->getTitulos();
+        return $this->render('valorant/ListadoTitulos.html.twig', [
+            'titulos' => $infotitles,
+        ]);
+    }
+    #[Route('/valorant/seasons', name: 'app_valorant_seasons')]
+    public function getSeasons(): Response
+    {
+        $infoSeasons = $this->ValorantApi->getTemporadas();
+        return $this->render('valorant/ListadoTemporadas.html.twig', [
+            'temporadas' => $infoSeasons,
+        ]);
+    }
 }

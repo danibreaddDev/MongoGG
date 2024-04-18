@@ -4,16 +4,15 @@
 {% endblock %}
 
 {% block body %}
-	<div class="container-fluid d-flex justify-content-center align-items-center">
-		<nav class="navbar navbar-light bg-dark">
-			<div class="container-fluid">
-				<form class="d-flex" method="post" id="search-form">
-					<input class="form-control me-2" type="search" name="name" placeholder="riot id" aria-label="Search">
-					<input class="form-control me-2" type="search" name="tag" placeholder="tag" aria-label="Search">
-					<button class="btn btn-outline-success" type="submit">Buscar</button>
-				</form>
-			</div>
-		</nav>
+	<div class="container mt-5 pt-5 justify-content-between">
+		<div class="mt-5 pt-5">
+		<h1 class="mt-5 pt-5">Find your summoner name</h1>
+			<form class="d-flex mt-5 pt-5" method="post" id="search-form">
+				<input class="form-control me-2" type="search" name="name" placeholder="riot id" aria-label="Search">
+				<input class="form-control me-2" type="search" name="tag" placeholder="tag" aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Buscar</button>
+			</form>
+		</div>
 	</div>
 {% endblock %}
 {% block javascripts %}

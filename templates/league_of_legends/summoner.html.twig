@@ -3,72 +3,74 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    {% include 'comunes/_menuLeagueOfLegends.html.twig'%}
-    <div class="container mt-5">
-        <table class="table table-dark table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Tipo de Clasificatorias</th>
-                    <th scope="col">Tier</th>
-                    <th scope="col">Rango</th>
-                    <th scope="col">Puntos de Liga</th>
-                    <th scope="col">Victorias</th>
-                    <th scope="col">Derrotas</th>
-                    <th scope="col">Porcentaje de Victoria</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if summoner is iterable %}
-                    {% for key, summon in summoner %}
-                        {% if key == 0 or key == 1 and summoner[key] is defined and attribute(summoner[key], 'queueType') is defined %}
-                            <tr>
-                                <td>{{ summon["queueType"] }}</td>
-                                <td>{{ summon["tier"] }}</td>
-                                <td>{{ summon["rank"] }}</td>
-                                <td>{{ summon["leaguePoints"] }}</td>
-                                <td>{{ summon["wins"] }}</td>
-                                <td>{{ summon["losses"] }}</td>
-                                {% set win_percentage = (summon["wins"] / (summon["wins"] + summon["losses"])) * 100 %}
-                                {# Mostrar el porcentaje redondeado #}
-                                <td>{{ win_percentage | round(0, 'floor') }}%</td>
-                            </tr>
-                        {% endif %}
-                    {% else %}
-                        <p>No hay Info para ranked</p>
-                    {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-    <div class="d-flex justify-content-center">
-        <button type="button" id="submitButton" class="btn btn-primary">Ver Últimas Partidas</button>
-    </div>
-    <div id="contentContainer"></div>
-    {% block javascripts %}
-        <script>
-            document.getElementById('submitButton').addEventListener('click', function () {
-                var rutaSymfony = obtenerNombreYTagDesdeURLActual();
-                console.log("Ruta de Symfony: " + rutaSymfony);
-                window.location.href = rutaSymfony;
-            });
-            function obtenerNombreYTagDesdeURLActual() {
-                var url = window.location.href;
-                url = url.replace(/\+/g, ' ');
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
+	</div>
+	<div class="container mt-5">
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Tipo de Clasificatorias</th>
+					<th scope="col">Tier</th>
+					<th scope="col">Rango</th>
+					<th scope="col">Puntos de Liga</th>
+					<th scope="col">Victorias</th>
+					<th scope="col">Derrotas</th>
+					<th scope="col">Porcentaje de Victoria</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if summoner is iterable %}
+					{% for key, summon in summoner %}
+						{% if key == 0 or key == 1 and summoner[key] is defined and attribute(summoner[key], 'queueType') is defined %}
+							<tr>
+								<td>{{ summon["queueType"] }}</td>
+								<td>{{ summon["tier"] }}</td>
+								<td>{{ summon["rank"] }}</td>
+								<td>{{ summon["leaguePoints"] }}</td>
+								<td>{{ summon["wins"] }}</td>
+								<td>{{ summon["losses"] }}</td>
+								{% set win_percentage = (summon["wins"] / (summon["wins"] + summon["losses"])) * 100 %}
+								{# Mostrar el porcentaje redondeado #}
+								<td>{{ win_percentage | round(0, 'floor') }}%</td>
+							</tr>
+						{% endif %}
+					{% else %}
+						<p>No hay Info para ranked</p>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+	<div class="d-flex justify-content-center">
+		<button type="button" id="submitButton" class="btn btn-primary">Ver Últimas Partidas</button>
+	</div>
+	<div id="contentContainer"></div>
+	{% block javascripts %}
+		<script>
+			document.getElementById('submitButton').addEventListener('click', function () {
+var rutaSymfony = obtenerNombreYTagDesdeURLActual();
+console.log("Ruta de Symfony: " + rutaSymfony);
+window.location.href = rutaSymfony;
+});
+function obtenerNombreYTagDesdeURLActual() {
+var url = window.location.href;
+url = url.replace(/\+/g, ' ');
 
-                var queryString = url.split('?')[1];
+var queryString = url.split('?')[1];
 
-                var queryParams = queryString.split('&');
+var queryParams = queryString.split('&');
 
-                var parametros = {};
+var parametros = {};
 
-                queryParams.forEach(function (param) {
-                    var partes = param.split('=');
-                    parametros[partes[0]] = decodeURIComponent(partes[1]);
-                });
-                var rutaSymfony = '/leagueoflegends/partidas/' + parametros['name'] + '&' + parametros['tag'];
-                return rutaSymfony;
-            }
-        </script>
-    {% endblock %}
+queryParams.forEach(function (param) {
+var partes = param.split('=');
+parametros[partes[0]] = decodeURIComponent(partes[1]);
+});
+var rutaSymfony = '/leagueoflegends/partidas/' + parametros['name'] + '&' + parametros['tag'];
+return rutaSymfony;
+}
+		</script>
+	{% endblock %}
 
 {% endblock %}

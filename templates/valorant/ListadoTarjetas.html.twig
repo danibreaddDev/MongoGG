@@ -1,89 +1,93 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Valorant - Tarjetas{% endblock %}
+{% block title %}Valorant - Tarjetas
+{% endblock %}
 
 {% block body %}
-{% include 'comunes/_menuValorant.html.twig' %}
-<div class="container">
-	<div class="row justify-content-end mt-5">
-		<div class="col-auto">
-			<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-				<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-				<label class="btn btn-outline-primary" for="btnradio1">Tall</label>
 
-				<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-				<label class="btn btn-outline-primary" for="btnradio2">Wide</label>
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
+	<div class="container">
+		<div class="row justify-content-end mt-5">
+			<div class="col-auto">
+				<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+					<label class="btn btn-outline-primary" for="btnradio1">Tall</label>
 
-				<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-				<label class="btn btn-outline-primary" for="btnradio3">Icon</label>
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+					<label class="btn btn-outline-primary" for="btnradio2">Wide</label>
+
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+					<label class="btn btn-outline-primary" for="btnradio3">Icon</label>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<div class="result-container mt-4"></div>
+	<div class="result-container mt-4"></div>
 
-{% block javascripts %}
-<script>
+	{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<script>
 
-    $(document).ready(function() {
-          cargarValorDefecto();
-        
-        $('.btn-check').change(function() {
-             console.log('Cambio de botón de radio detectado');
-            // Obtener el ID único del botón seleccionado
-            var buttonId = $(this).attr('id');
+			$(document).ready(function () {
+cargarValorDefecto();
 
-            // Determinar la ruta según el botón seleccionado
-            var route;
-            if (buttonId === 'btnradio1') {
-                route = '{{ path('app_valorant_tarjetasTall') }}';
-            } else if (buttonId === 'btnradio2') {
-                route = '{{ path('app_valorant_tarjetasWide') }}';
-            } else if (buttonId === 'btnradio3') {
-                route = '{{ path('app_valorant_tarjetasIcon') }}';
-            }
+$('.btn-check').change(function () {
+console.log('Cambio de botón de radio detectado');
+// Obtener el ID único del botón seleccionado
+var buttonId = $(this).attr('id');
 
-            // Realizar la solicitud AJAX a la ruta determinada
-            $.ajax({
-                url: route,
-                success: function(response) {
-                    $('.result-container').html(response);
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                }
-            });
-        });
-    });
-     function cargarValorDefecto() {
-        // Obtener el ID único del botón seleccionado por defecto
-        var buttonId = $('.btn-check:checked').attr('id');
+// Determinar la ruta según el botón seleccionado
+var route;
+if (buttonId === 'btnradio1') {
+route = '{{ path('app_valorant_tarjetasTall') }}';
+} else if (buttonId === 'btnradio2') {
+route = '{{ path('app_valorant_tarjetasWide') }}';
+} else if (buttonId === 'btnradio3') {
+route = '{{ path('app_valorant_tarjetasIcon') }}';
+}
 
-        // Determinar la ruta según el botón seleccionado
-        var route;
-        if (buttonId === 'btnradio1') {
-            route = '{{ path('app_valorant_tarjetasTall') }}';
-        } else if (buttonId === 'btnradio2') {
-            route = '{{ path('app_valorant_tarjetasWide') }}';
-        } else if (buttonId === 'btnradio3') {
-            route = '{{ path('app_valorant_tarjetasIcon') }}';
-        }
+// Realizar la solicitud AJAX a la ruta determinada
+$.ajax({
+url: route,
+success: function (response) {
+$('.result-container').html(response);
+},
+error: function (xhr, status, error) {
+console.error(error);
+}
+});
+});
+});
+function cargarValorDefecto() { // Obtener el ID único del botón seleccionado por defecto
+var buttonId = $('.btn-check:checked').attr('id');
 
-        // Realizar la solicitud AJAX a la ruta determinada
-        $.ajax({
-            url: route,
-            type: 'POST',
-            data: {}, // Puedes enviar datos adicionales si es necesario
-            success: function(response) {
-                $('.result-container').html(response);
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-            }
-        });
-    }
-</script>
-{% endblock %}
+// Determinar la ruta según el botón seleccionado
+var route;
+if (buttonId === 'btnradio1') {
+route = '{{ path('app_valorant_tarjetasTall') }}';
+} else if (buttonId === 'btnradio2') {
+route = '{{ path('app_valorant_tarjetasWide') }}';
+} else if (buttonId === 'btnradio3') {
+route = '{{ path('app_valorant_tarjetasIcon') }}';
+}
+
+// Realizar la solicitud AJAX a la ruta determinada
+$.ajax({
+url: route,
+type: 'POST',
+data: {}, // Puedes enviar datos adicionales si es necesario
+success: function (response) {
+$('.result-container').html(response);
+},
+error: function (xhr, status, error) {
+console.error(error);
+}
+});
+}
+		</script>
+	{% endblock %}
 
 
 {% endblock %}

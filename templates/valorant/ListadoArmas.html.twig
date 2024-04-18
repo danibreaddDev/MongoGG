@@ -4,9 +4,11 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'comunes/_menuValorant.html.twig' %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_valorant') }}">Return</a>
+	</div>
 	<div class="container mt-4 text-center">
-		<h1 class="mb-4 text-white">Weapons - Valorant</h1>
+		<h1 class="mb-4 text-white">WEAPONS</h1>
 
 		<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
 			{% for arma in armas|sort((a, b) => a.shopData <=> b.shopData) %}
@@ -24,6 +26,32 @@
 									<p class="card-text text-white">
 										<strong>Category:</strong>
 										{{ arma.shopData.category }}</p>
+								</div>
+							{% endif %}
+						</div>
+
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<h1 class="text-white">SHIELDS</h1>
+		<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
+		
+			{% for escudo in escudos|sort((a, b) => a.shopData <=> b.shopData) %}
+				<div class="col mb-4 mt-3">
+					<div class="card bg-dark">
+						<img src="{{ escudo.displayIcon }}" alt="{{ escudo.displayName }}" class="card-img-top mx-auto mt-4" style="max-width: 200px; max-height: 200px;">
+						<div class="card-body text-center p-3 rounded bg-dark">
+							<h5 class="card-title text-white mb-0">{{ escudo.displayName }}</h5>
+							{% if escudo.shopData is iterable %}
+								<div class="mt-3">
+									<p class="card-text text-white mb-1">
+										<strong>Cost:</strong>
+										{{ escudo.shopData.cost }}
+										credits</p>
+									<p class="card-text text-white">
+										<strong>Category:</strong>
+										{{ escudo.shopData.category }}</p>
 								</div>
 							{% endif %}
 						</div>

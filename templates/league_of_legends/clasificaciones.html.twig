@@ -3,7 +3,9 @@
 {% endblock %}
 
 {% block body %}
-	{% include 'comunes/_menuLeagueOfLegends.html.twig' %}
+<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
+	</div>
 	<div class="container mt-5">
 		<form id="search-form" method="GET" action="{{ path('app_league_of_legends_clasificaciones_filtradas') }}">
 			<div class="row justify-content-center">
