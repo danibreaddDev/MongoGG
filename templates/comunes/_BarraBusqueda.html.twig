@@ -6,11 +6,11 @@
 {% block body %}
 	<div class="container mt-5 pt-5 justify-content-between">
 		<div class="mt-5 pt-5">
-		<h1 class="mt-5 pt-5">Find your summoner name</h1>
+			<h1 class="mt-5 pt-5">Find your summoner name</h1>
 			<form class="d-flex mt-5 pt-5" method="post" id="search-form">
-				<input class="form-control me-2" type="search" name="name" placeholder="riot id" aria-label="Search">
-				<input class="form-control me-2" type="search" name="tag" placeholder="tag" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Buscar</button>
+				<input class="form-control me-2" type="search" name="name" placeholder="riot id" aria-label="Search" id="name">
+				<input class="form-control me-2" type="search" name="tag" placeholder="tag" aria-label="Search" id="tag">
+				<button class="btn btn-success" type="submit">Buscar</button>
 			</form>
 		</div>
 	</div>
@@ -22,11 +22,18 @@ event.preventDefault();
 
 // Obtener los valores seleccionados del formulario
 var formData = new FormData(this);
+
 if (formData.get('name') === "" && formData.get('tag') === "") {
 alert('Por favor ingresa un nombre de invocador. y/o tag');
 window.location.href = window.location.href;
 return;
 }
+var nombre = document.getElementById('name').value;
+var tag = document.getElementById('tag').value;
+
+// Almacenar los valores en variables globales
+window.nombreGlobal = nombre;
+window.tagGlobal = tag;
 // Obtener la URL de la ruta de destino
 var url = '{{ path('app_league_of_legends_summonername') }}?' + new URLSearchParams(formData).toString();
 

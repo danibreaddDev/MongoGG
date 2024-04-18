@@ -3,6 +3,7 @@
 {% endblock %}
 
 {% block body %}
+
 <div class="container">
 		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
 	</div>
@@ -45,10 +46,11 @@
 				</div>
 			</div>
 			<div class="row mt-3 justify-content-center">
-				<div class="col-md-1 text-md-end">
+				<div class="col-md-3 text-md-end">
 					<button type="submit" id="search-button" class="btn btn-primary">Buscar</button>
 				</div>
 			</div>
+			{% include 'comunes/Modal_Carga.html.twig' %}
 			<div id="result-container"></div>
 		{% endblock %}
 		{% block javascripts %}
@@ -72,11 +74,19 @@
         });
     </script>
 			<script>
+			function mostrarModalCarga() {
+            $('#loadingModal').modal('show'); // Mostrar el modal de carga
+        }
+
+        function ocultarModalCarga() {
+            $('#loadingModal').modal('hide'); // Ocultar el modal de carga
+        }
 				document.getElementById('search-form').addEventListener('submit', function (event) {
 event.preventDefault();
 
 // Obtener los valores seleccionados del formulario
 var formData = new FormData(this);
+mostrarModalCarga();
 
 // Realizar la solicitud AJAX
 var xhr = new XMLHttpRequest();
@@ -87,6 +97,7 @@ var data = xhr.responseText;
 
 // Actualizar el contenido del contenedor con el contenido de la vista externa
 document.getElementById('result-container').innerHTML = data;
+ocultarModalCarga();
 } else { // Manejar errores
 console.error('Error en la solicitud AJAX');
 }

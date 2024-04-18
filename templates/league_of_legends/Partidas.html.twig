@@ -3,9 +3,6 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
-		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
-	</div>
 	{% for partida in partidas %}
 		<div class="container mt-5">
 		{% set resultado = partida.info.gameDuration / 60 %}	
