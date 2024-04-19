@@ -1,42 +1,90 @@
 {% extends 'base.html.twig' %}
-{% block title %}Map{% endblock %}
+{% block title %}Map
+{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="text-center">
-                        {% for key, item in map.images %}
-                            {% if key == "pois" %}
-                                <img src="{{ item }}" class="img-fluid" alt="Map Image">
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        {% set chunkSize = map.pois|length // 3 %}
-                        {% for chunk in map.pois|batch(chunkSize) %}
-                            <div class="col-md-4">
-                                <ul class="list-group">
-                                    {% for loc in chunk %}
-                                        <li class="list-group-item">
-                                            <h5>{{ loc.name }}</h5>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_main') }}">Return</a>
+	</div>
+
+	<div class="container mt-5 text-center text-white">
+		<h1>ACTUAL MAP AND LOCATIONS</h1>
+		<div class="row mt-5 justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-body">
+						<div class="text-center">
+							{% for key, item in map.images %}
+								{% if key == "pois" %}
+									<img src="{{ item }}" class="img-fluid" alt="Map Image">
+								{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 mt-5">
+				<div class="row mt-5">
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="accordion" id="accordionLocations1">
+									{% set index = 1 %}
+									{% for chunk in map.pois|slice(0, map.pois|length // 2)|batch(3) %}
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="heading{{ index }}">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ index }}" aria-expanded="false" aria-controls="collapse{{ index }}">
+													Locations
+													{{ index }}
+												</button>
+											</h2>
+											<div id="collapse{{ index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ index }}" data-bs-parent="#accordionLocations1">
+												<div class="accordion-body">
+													<ul class="list-group">
+														{% for loc in chunk %}
+															<li class="list-group-item">{{ loc.name }}</li>
+														{% endfor %}
+													</ul>
+												</div>
+											</div>
+										</div>
+										{% set index = index + 1 %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="card">
+							<div class="card-body">
+								<div class="accordion" id="accordionLocations2">
+									{% set index = map.pois|length // 2 + 1 %}
+									{% for chunk in map.pois|slice(map.pois|length // 2)|batch(3) %}
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="heading{{ index }}">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ index }}" aria-expanded="false" aria-controls="collapse{{ index }}">
+													Locations
+													{{ index }}
+												</button>
+											</h2>
+											<div id="collapse{{ index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ index }}" data-bs-parent="#accordionLocations2">
+												<div class="accordion-body">
+													<ul class="list-group">
+														{% for loc in chunk %}
+															<li class="list-group-item">{{ loc.name }}</li>
+														{% endfor %}
+													</ul>
+												</div>
+											</div>
+										</div>
+										{% set index = index + 1 %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
