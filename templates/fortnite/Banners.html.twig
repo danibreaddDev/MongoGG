@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BANNERS
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_fortnite') }}">Return</a>
+	</div>
+	<div class="container mt-5">
+		<div class="small-select-wrapper mt-3" style="width:200px;">
+
+			<label for="categorySelect" class="text-white">Select Category:</label>
+			<select class="form-control form-control-sm" id="categorySelect">
+				<option value="">All</option>
+				<option value="Standard">Standard</option>
+				<option value="Special">Special</option>
+				<option value="BattleRoyale">BattleRoyale</option>
+				<option value="Other">Other</option>
+			</select>
+		</div>
+	</div>
+	<div class="container mt-5 text-white text-center">
+		<h1>BANNERS</h1>
+		<div class="row mt-5" id="bannerCards">
+			{% for banner in banners %}
+				<div class="col-md-2 mb-4 banner-card" data-category="{{ banner.category }}">
+					<div class="card bg-dark text-white" style="width:11rem;">
+						<img src="{{banner.images.smallIcon}}" alt="{{banner.images.smallIcon}}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100px; max-height: 100px;">
+						<div class="card-body">
+							<h5 class="card-title">{{ banner.devName }}</h5>
+							<p class="card-text">{{ banner.category }}</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+const categorySelect = document.getElementById('categorySelect');
+const bannerCards = document.querySelectorAll('.banner-card');
+
+categorySelect.addEventListener('change', function () {
+const selectedCategory = categorySelect.value;
+bannerCards.forEach(function (card) {
+const category = card.getAttribute('data-category');
+if (selectedCategory === '' || selectedCategory === category) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+});
+});
+	</script>
+{% endblock %}

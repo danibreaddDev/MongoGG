@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Fortnite
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_main') }}">Return</a>
+	</div>
+	<div class="container mt-4 text-center text-white">
+		<div class="row">
+			<div class="d-flex flex-wrap justify-content-center">
+				<h1 class="text-white">FORTNITE</h1>
+				<img src="{{ asset('images/fortnite.png') }}" alt="icono" class="img-fluid ms-3" style="width:60px; heigth:60px;"/>
+			</div>
+		</div>
+         <div class="row">
+        <div class="col-md-6">
+            {% include 'comunes/_MenuFortnite.html.twig'%}
+        </div>
+        <div class="col-md-6">
+            {% include 'comunes/_BarraBusquedaFortnite.html.twig'%}
+        </div>
+    </div>
+	</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LOL Tracker
+{% endblock %}
+
+{% block body %}
+{% include 'comunes/Modal_Carga.html.twig' %}
+	<div class="container mt-5 pt-5 justify-content-between">
+		<div class="mt-5 pt-5">
+			<h1 class="mt-5 pt-5">Find your user</h1>
+			<form class="d-flex mt-5 pt-5" method="post" id="search-form">
+				<input class="form-control me-2" type="search" name="name" placeholder="Epic user" aria-label="Search" id="name">
+				<button class="btn btn-success" type="submit">Buscar</button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	function mostrarModalCarga() {
+            $('#loadingModal').modal('show'); // Mostrar el modal de carga
+        }
+
+        function ocultarModalCarga() {
+            $('#loadingModal').modal('hide'); // Ocultar el modal de carga
+        }
+		document.getElementById('search-form').addEventListener('submit', function (event) {
+event.preventDefault();
+
+
+// Obtener los valores seleccionados del formulario
+var formData = new FormData(this);
+
+if (formData.get('name') === ""){
+alert('Por favor ingresa un nombre');
+window.location.href = window.location.href;
+return;
+}
+mostrarModalCarga();
+var url = '{{ path('app_league_of_legends_summonername') }}?' + new URLSearchParams(formData).toString();
+
+// Redirigir a la URL
+ocultarModalCarga();
+window.location.href = url;
+
+
+});
+	</script>
+
+{% endblock %}

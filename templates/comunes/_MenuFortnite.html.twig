@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+{% block stylesheets %}
+	<style>
+		.card-link {
+			color: inherit; /* Mantener el color de texto original */
+			text-decoration: none; /* Quitar subrayado */
+			cursor: pointer; /* Cambiar cursor al puntero al pasar sobre el enlace */
+
+		}
+		@keyframes slideIn {
+			from {
+				opacity: 0;
+				transform: translateY(-20px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		/* Aplica la animación a la clase card-body */
+		.card-body {
+			animation: slideIn 0.5s ease-out;
+			transition: transform 0.2s ease-out;
+		}
+		.card-body:hover {
+			transform: translatex(-10px);
+		}
+	</style>
+{% endblock %}
+{% block body %}
+<div class="pt-5 mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_fortnite_banners') }}" class="card-link">
+                    <h1 class="card-text text-white">Banners</h1>
+                    <img src="{{asset('images/cards.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_fortnite_cosmetics') }}" class="card-link">
+                    <h1 class="card-text text-white">Cosmetics</h1>
+                    <img src="{{asset('images/cosmetics.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">codes</h1>
+                    <img src="{{asset('images/cc.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">Map</h1>
+                    <img src="{{asset('images/map.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">News</h1>
+                    <img src="{{asset('images/news.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">Playlists</h1>
+                    <img src="{{asset('images/gamemode.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">Shop</h1>
+                    <img src="{{asset('images/shop.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body bg-dark rounded" style="width:12rem;">
+                <a href="{{ path('app_valorant_agentes') }}" class="card-link">
+                    <h1 class="card-text text-white">Stats</h1>
+                    <img src="{{asset('images/stats.png')}}" alt="icono" class="img-fluid mx-auto"/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

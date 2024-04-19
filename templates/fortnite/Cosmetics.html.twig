@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}BANNERS{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a class="btn btn-primary bg-dark mt-5" href="{{ path('app_fortnite') }}">Return</a>
+</div>
+<div class="container">
+ <div class="form-group mt-3">
+        <div class="small-select-wrapper" style="width:200px;">
+            <label for="raritySelect" class="text-white">Select Rarity:</label>
+            <select class="form-control form-control-sm" id="raritySelect">
+                <option value="">All</option>
+                <option value="uncommon">uncommon</option>
+                <option value="rare">Rare</option>
+                <option value="epic">Epic</option>
+                <option value="icon">icon</option>
+                <option value="legendary">Legendary</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <div class="small-select-wrapper" style="width:200px;">
+            <label for="typeSelect" class="text-white">Select Type:</label>
+            <select class="form-control form-control-sm" id="typeSelect">
+                <option value="">All</option>
+                <option value="pickaxe">pickaxe</option>
+                <option value="backpack">backpack</option>
+                <option value="outfit">outfit</option>
+                <option value="emote">emote</option>
+                <option value="loadingscreen">loadingscreen</option>
+                <option value="music">music</option>
+                <option value="wrap">wrap</option>
+                
+            </select>
+        </div>
+    </div>
+</div>
+<div class="container mt-5 text-white text-center">
+    <h1>NEW COSMETICS</h1>
+   
+    <div class="row mt-5" id="cosmeticCards">
+        {% for cosmetic in cosmetics %}
+        <div class="col-md-2 mb-4 cosmetic-card" data-rarity="{{ cosmetic.rarity.value }}" data-type="{{ cosmetic.type.value }}">
+            <div class="card bg-dark text-white" style="width:11rem;">
+                <img src="{{ cosmetic.images.icon }}" alt="{{ cosmetic.images.icon }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100px; max-height: 100px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ cosmetic.name }}</h5>
+                    <p class="card-text">Rarity: {{ cosmetic.rarity.value }}</p>
+                    <p class="card-text">Type: {{ cosmetic.type.value }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const raritySelect = document.getElementById('raritySelect');
+    const typeSelect = document.getElementById('typeSelect');
+    const cosmeticCards = document.querySelectorAll('.cosmetic-card');
+
+    raritySelect.addEventListener('change', function() {
+        filterCosmetics();
+    });
+
+    typeSelect.addEventListener('change', function() {
+        filterCosmetics();
+    });
+
+    function filterCosmetics() {
+        const selectedRarity = raritySelect.value;
+        const selectedType = typeSelect.value;
+        cosmeticCards.forEach(function(card) {
+            const rarity = card.getAttribute('data-rarity');
+            const type = card.getAttribute('data-type');
+            if ((selectedRarity === '' || selectedRarity === rarity) && (selectedType === '' || selectedType === type)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
