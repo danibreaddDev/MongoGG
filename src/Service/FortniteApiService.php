@@ -39,4 +39,20 @@ class FortniteApiService
         $cosmetics = $cosmetics["items"];
         return $cosmetics;
     }
+    public function getCodes(string $name): array
+    {
+        $url = "https://fortnite-api.com/v2/creatorcode" . "?name=" . $name;
+        $response = $this->httpclient->request('GET', $url);
+        $data = $response->toArray();
+        $codes = $data["data"];
+        return $codes;
+    }
+    public function getMap(): array
+    {
+        $url = "https://fortnite-api.com/v1/map";
+        $response = $this->httpclient->request('GET', $url);
+        $data = $response->toArray();
+        $map = $data["data"];
+        return $map;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\FortniteApiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -35,6 +36,32 @@ class FortniteController extends AbstractController
         $infoCosmetics = $this->fortniteApi->getCosmetics();
         return $this->render('fortnite/Cosmetics.html.twig', [
             'cosmetics' => $infoCosmetics,
+        ]);
+    }
+    #[Route('/fortnite/creatorCodes', name: 'app_fortnite_creatorcode')]
+    public function viewCreatorCode(): Response
+    {
+        return $this->render('fortnite/CreatorsCode.html.twig', [
+            'codes' => 'code',
+        ]);
+    }
+    #[Route('/fortnite/creatorCodesfilter', name: 'app_fortnite_creatorcode_filter')]
+    public function getCreatorCodes_filter(Request $request): Response
+    {
+        $name = $request->query->get('name');
+
+        $infocreator = $this->fortniteApi->getCodes($name);
+        return $this->render('fortnite/AjaxcreatorsCode.html.twig', [
+            'creator' => $infocreator,
+        ]);
+    }
+    #[Route('/fortnite/map', name: 'app_fortnite_map')]
+    public function getMap(): Response
+    {
+
+        $infoMap = $this->fortniteApi->getMap();
+        return $this->render('fortnite/Map.html.twig', [
+            'map' => $infoMap,
         ]);
     }
 }

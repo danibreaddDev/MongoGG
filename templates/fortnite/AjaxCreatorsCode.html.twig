@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Creator Details: {{ creator.code }}{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card bg-dark text-center text-white">
+        <div class="card-header">
+            <h2 class="card-title">Creator Details: {{ creator.code }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="card-title">Account Information</h4>
+                    <p><strong>ID:</strong> {{ creator.account.id }}</p>
+                    <p><strong>Name:</strong> {{ creator.account.name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="card-title">Status</h4>
+                    <p><strong>Status:</strong> {{ creator.status }}</p>
+                    <p><strong>Verified:</strong> {% if creator.verified %} Yes {% else %} No {% endif %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

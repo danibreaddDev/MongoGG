@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}Map{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        {% for key, item in map.images %}
+                            {% if key == "pois" %}
+                                <img src="{{ item }}" class="img-fluid" alt="Map Image">
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        {% set chunkSize = map.pois|length // 3 %}
+                        {% for chunk in map.pois|batch(chunkSize) %}
+                            <div class="col-md-4">
+                                <ul class="list-group">
+                                    {% for loc in chunk %}
+                                        <li class="list-group-item">
+                                            <h5>{{ loc.name }}</h5>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

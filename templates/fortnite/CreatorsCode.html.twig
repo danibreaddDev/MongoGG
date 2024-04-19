@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}code filter
+{% endblock %}
+
+{% block body %}
+	{% include 'comunes/Modal_Carga.html.twig' %}
+    <div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_fortnite') }}">Return</a>
+	</div>
+	<div class="container mt-5 justify-content-between text-white text-center">
+		<div class="mt-5">
+			<h1 class="mt-5 pt-5">Find by code creator</h1>
+			<form class="d-flex mt-5 pt-5" method="post" id="search-form">
+				<input class="form-control me-2" type="search" name="name" placeholder="Code Creator" aria-label="Search" id="name">
+				<button class="btn btn-success" type="submit">Buscar</button>
+			</form>
+		</div>
+	</div>
+	<div class="container" id="result-container"></div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+
+		function mostrarModalCarga() {
+$('#loadingModal').modal('show'); // Mostrar el modal de carga
+}
+
+function ocultarModalCarga() {
+$('#loadingModal').modal('hide'); // Ocultar el modal de carga
+}
+document.getElementById('search-form').addEventListener('submit', function (event) {
+event.preventDefault();
+
+// Obtener los valores seleccionados del formulario
+var formData = new FormData(this);
+mostrarModalCarga();
+
+// Realizar la solicitud AJAX
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '{{ path('app_fortnite_creatorcode_filter') }}?' + new URLSearchParams(formData).toString(), true);
+xhr.onload = function () {
+if (xhr.status >= 200 && xhr.status < 400) { // La solicitud fue exitosa
+var data = xhr.responseText;
+
+// Actualizar el contenido del contenedor con el contenido de la vista externa
+document.getElementById('result-container').innerHTML = data;
+ocultarModalCarga();
+} else { // Manejar errores
+console.error('Error en la solicitud AJAX');
+document.getElementById('result-container').innerHTML = "<div class='container mt-5 text-center text-white'><h1>No results Available</h1></div>";
+ocultarModalCarga();
+}
+};
+xhr.send();
+});
+	</script>
+
+{% endblock %}
