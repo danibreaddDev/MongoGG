@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_main') }}">Return</a>
+	</div>
+<div class="container mt-5 text-white text-center">
+<h1 class="mb-5">NEWS</h1>
+    <div class="row">
+        {% for new in news %}
+        <div class="col-md-4 text-white">
+            <div class="card mb-4">
+                <div class="card-body bg-dark">
+                    <h5 class="card-title text-white">{{ new.title }}</h5>
+                    {% set date = new.lastModified | split('T')[0] %}
+                    <h6 class="card-title text-white">{{date}}</h6>
+                    {% for message in news.creative.messages %}
+                    <div class="card text-white bg-dark">
+                        <div class="card-body bg-dark">
+                            <h6 class="card-subtitle mb-2">{{ message.title }}</h6>
+                            <p class="card-text">{{ message.body }}</p>
+                            <img src="{{ message.image }}" class="card-img-top img-fluid" alt="{{ message.image }}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

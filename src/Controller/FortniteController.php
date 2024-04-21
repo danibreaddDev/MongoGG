@@ -64,4 +64,31 @@ class FortniteController extends AbstractController
             'map' => $infoMap,
         ]);
     }
+    #[Route('/fortnite/news', name: 'app_fortnite_news')]
+    public function getNews(): Response
+    {
+
+        $infoNews = $this->fortniteApi->getNews();
+        return $this->render('fortnite/News.html.twig', [
+            'news' => $infoNews,
+        ]);
+    }
+    #[Route('/fortnite/playlists', name: 'app_fortnite_playlists')]
+    public function getPlaylists(): Response
+    {
+
+        $infoPlaylists = $this->fortniteApi->getPlaylists();
+        return $this->render('fortnite/Playlists.html.twig', [
+            'playlists' => $infoPlaylists,
+        ]);
+    }
+    #[Route('/fortnite/shop', name: 'app_fortnite_shop')]
+    public function getShop(): Response
+    {
+
+        $infoShop = $this->fortniteApi->getShop();
+        return $this->render('fortnite/Shop.html.twig', [
+            'shops' => $infoShop,
+        ]);
+    }
 }

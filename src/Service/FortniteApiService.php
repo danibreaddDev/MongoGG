@@ -55,4 +55,28 @@ class FortniteApiService
         $map = $data["data"];
         return $map;
     }
+    public function getNews(): array
+    {
+        $url = "https://fortnite-api.com/v1/news";
+        $response = $this->httpclient->request('GET', $url);
+        $data = $response->toArray();
+        $news = $data["data"];
+        return $news;
+    }
+    public function getPlaylists(): array
+    {
+        $url = "https://fortnite-api.com/v1/playlists";
+        $response = $this->httpclient->request('GET', $url);
+        $data = $response->toArray();
+        $playlists = $data["data"];
+        return $playlists;
+    }
+    public function getShop(): array
+    {
+        $url = "https://fortnite-api.com/v2/shop/br/combined";
+        $response = $this->httpclient->request('GET', $url);
+        $data = $response->toArray();
+        $shop = $data["data"];
+        return $shop;
+    }
 }

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block body %}
+<div class="container">
+    <a class="btn btn-primary bg-dark mt-5" href="{{ path('app_fortnite') }}">Return</a>
+</div>
+
+<div class="container mt-5 text-white text-center">
+    <h1>Actual Shop</h1>
+
+    <div class="form-group mt-3">
+        <div class="small-select-wrapper" style="width:200px;">
+            <label for="raritySelect" class="text-white">Select Rarity:</label>
+            <select class="form-control form-control-sm" id="raritySelect">
+                <option value="">All</option>
+                <option value="uncommon">Uncommon</option>
+                <option value="rare">Rare</option>
+                <option value="epic">Epic</option>
+                <option value="icon">Icon</option>
+                <option value="legendary">Legendary</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group mt-3">
+        <div class="small-select-wrapper" style="width:200px;">
+            <label for="typeSelect" class="text-white">Select Type:</label>
+            <select class="form-control form-control-sm" id="typeSelect">
+                <option value="">All</option>
+                <option value="pickaxe">Pickaxe</option>
+                <option value="backpack">Backpack</option>
+                <option value="outfit">Outfit</option>
+                <option value="emote">Emote</option>
+                <option value="loadingscreen">Loadingscreen</option>
+                <option value="music">Music</option>
+                <option value="wrap">Wrap</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-5" id="shopCards">
+        {% for item in shops.featured.entries %}
+            {% for obj in item.items %}
+                <div class="col-md-2 mb-4 shop-card" data-rarity="{{ obj.rarity.value }}" data-type="{{ obj.type.value }}">
+                    <div class="card bg-dark text-white" style="width:11rem;">
+                        <img src="{{ obj.images.smallIcon }}" alt="{{ obj.name }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100%; max-height: 150px;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ obj.name }}</h5>
+                            <p class="card-text">{{ obj.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const raritySelect = document.getElementById('raritySelect');
+            const typeSelect = document.getElementById('typeSelect');
+            const bannerCards = document.querySelectorAll('.shop-card');
+
+            raritySelect.addEventListener('change', function () {
+                filterShopCards();
+            });
+
+            typeSelect.addEventListener('change', function () {
+                filterShopCards();
+            });
+
+
+            function filterShopCards() {
+                const selectedRarity = raritySelect.value;
+                const selectedType = typeSelect.value;
+                bannerCards.forEach(function (card) {
+                    const rarity = card.getAttribute('data-rarity');
+                    const type = card.getAttribute('data-type');
+                    if ((selectedRarity === '' || selectedRarity === rarity) && (selectedType === '' || selectedType === type)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+{% endblock %}

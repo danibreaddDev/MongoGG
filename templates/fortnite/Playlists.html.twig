@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Playlists{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_fortnite') }}">Return</a>
+	</div>
+<div class="container mt-5 text-center text-white">
+<h1 class="mb-5">PlayLists</h1>
+    <div class="row">
+        {% set printed_games = [] %}
+        {% for game in playlists %}
+            {% if game.name not in printed_games %}
+                {% set printed_games = printed_games | merge([game.name]) %}
+                {% if game.minPlayers != -1 and game.maxPlayers != -1 %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card text-white bg-dark">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ game.name }}</h5>
+                                <p class="card-text">{{ game.description }}</p>
+                                <ul class="list-group list-group-flush">
+                                    {% if game.minPlayers != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Min Players: {{ game.minPlayers }}</li>
+                                    {% endif %}
+                                    {% if game.maxPlayers != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Max Players: {{ game.maxPlayers }}</li>
+                                    {% endif %}
+                                    {% if game.maxTeams != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Max Teams: {{ game.maxTeams }}</li>
+                                    {% endif %}
+                                    {% if game.maxTeamSize != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Max Team Size: {{ game.maxTeamSize }}</li>
+                                    {% endif %}
+                                    {% if game.maxSquads != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Max Squads: {{ game.maxSquads }}</li>
+                                    {% endif %}
+                                    {% if game.maxSquadSize != -1 %}
+                                        <li class="list-group-item bg-dark text-white">Max Squad Size: {{ game.maxSquadSize }}</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
