@@ -45,7 +45,7 @@
             {% for obj in item.items %}
                 <div class="col-md-2 mb-4 shop-card" data-rarity="{{ obj.rarity.value }}" data-type="{{ obj.type.value }}">
                     <div class="card bg-dark text-white" style="width:11rem;">
-                        <img src="{{ obj.images.smallIcon }}" alt="{{ obj.name }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100%; max-height: 150px;">
+                        <img src="{{ obj.images.smallIcon }}" alt="{{ obj.name }}" class="card-img-top img-thumbnail mx-auto mt-2" style="max-width: 100px; max-height: 100px;">
                         <div class="card-body">
                             <h5 class="card-title">{{ obj.name }}</h5>
                             <p class="card-text">{{ obj.description }}</p>
