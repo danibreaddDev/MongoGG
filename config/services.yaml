@@ -27,8 +27,9 @@ services:
             $apiKey: "RGAPI-dc958de7-fae6-43fb-8b89-7162d5223cf6" # Reemplaza 'tu_clave_de_api_aqui' con tu propia clave de API
             $name: "usuario_predeterminado" # Reemplaza 'valor_predeterminado' con el valor que desees
             $tag: "tag_predeterminado" # Reemplaza 'valor_predeterminado' con el valor que desees
-
-
+    App\Service\FortniteApiService:
+        arguments:
+            $apiKey: "9a9cb364-9075-43ad-90f8-9a44d9781792"
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

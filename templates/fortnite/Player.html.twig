@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PlayerStats
+{% endblock %}
+{% block stylesheet %}
+	<style>
+		.col-6,
+		.col-md-3,
+		.mb-3 {
+			background: red;
+		}
+	</style>
+{% endblock %}
+{% block body %}
+	<div class="container mt-5">
+		<a class="btn btn-primary bg-dark mb-3" href="{{ path('app_fortnite') }}">Return</a>
+	</div>
+	<div class="container-fluid">
+		<header style="background-image: url('{{ asset('images/fondo.jpg') }}');
+			    background-size: cover;
+			    background-position: center;
+			    height: 400px;
+			    text-align: center;
+			    color: white;
+			    padding-top: 100px;"></header>
+	</div>
+	<div class="container text-white text-center mb-5 mt-4">
+		<h1>{{ player.account.name }}</h1>
+	</div>
+
+	<div class="container mb-5">
+		<div class="card bg-dark p-4">
+			<h2 class="card-title mb-4 rounded text-center" style="background: #00FA9A; width:170px;">OVERVIEW</h2>
+			{% if player.stats.all.overall is not null %}
+				<div class="d-flex flex-wrap text-center text-white justify-content-center">
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>Win%</h5>
+						<p>{{ player.stats.all.overall.winRate }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>Wins</h5>
+						<p>{{ player.stats.all.overall.wins }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>K/D</h5>
+						<p>{{ player.stats.all.overall.kd }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>KILLS</h5>
+						<p>{{ player.stats.all.overall.kills }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>SCORE</h5>
+						<p>{{ player.stats.all.overall.score }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 3</h5>
+						<p>{{ player.stats.all.overall.top3 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 5</h5>
+						<p>{{ player.stats.all.overall.top5 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 6</h5>
+						<p>{{ player.stats.all.overall.top6 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 10</h5>
+						<p>{{ player.stats.all.overall.top10 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 12</h5>
+						<p>{{ player.stats.all.overall.top12 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>TOP 25</h5>
+						<p>{{ player.stats.all.overall.top25 }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>DEATHS</h5>
+						<p>{{ player.stats.all.overall.deaths }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>PLAYED MINUTES</h5>
+						<p>{{ player.stats.all.overall.minutesPlayed }}</p>
+					</div>
+					<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+						<h5>MATCHES</h5>
+						<p>{{ player.stats.all.overall.matches }}</p>
+					</div>
+				</div>
+			{% else %}
+				<p class="text-white">INFORMATION NOT AVAILABLE</p>
+			{% endif %}
+		</div>
+	</div>
+
+	{% set modes = ['SOLO', 'DUO', 'TRIO', 'SQUAD', 'LTM'] %}
+	{% set backgrounds = ['#48D1CC', '#FFA500', '#8A2BE2', '#FF6347', '#20B2AA'] %}
+	{% for key,mode in modes %}
+		<div class="container mb-5">
+			<div class="card bg-dark p-4">
+				<h2 class="card-title mb-4 rounded text-center" style="background: {{ backgrounds[key] }}; width:120px;">{{ mode }}</h2>
+				{% set stats = attribute(player.stats.all, mode|lower) %}
+				{% if stats is not null %}
+					<div class="d-flex flex-wrap text-center text-white justify-content-center">
+						<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+							<h5>Win%</h5>
+							<p>{{ stats.winRate }}</p>
+						</div>
+						<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+							<h5>Wins</h5>
+							<p>{{ stats.wins }}</p>
+						</div>
+						<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+							<h5>K/D</h5>
+							<p>{{ stats.kd }}</p>
+						</div>
+						<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+							<h5>KILLS</h5>
+							<p>{{ stats.kills }}</p>
+						</div>
+						{% if mode == 'SOLO' %}
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 10</h5>
+								<p>{{ stats.top10 }}</p>
+							</div>
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 25</h5>
+								<p>{{ stats.top25 }}</p>
+							</div>
+						{% elseif mode == 'DUO' %}
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 5</h5>
+								<p>{{ stats.top5 }}</p>
+							</div>
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 12</h5>
+								<p>{{ stats.top12 }}</p>
+							</div>
+						{% elseif mode == 'TRIO' %}
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 3</h5>
+								<p>{{ stats.top3 }}</p>
+							</div>
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 6</h5>
+								<p>{{ stats.top6 }}</p>
+							</div>
+						{% elseif mode == 'SQUAD' %}
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 3</h5>
+								<p>{{ stats.top3 }}</p>
+							</div>
+							<div class="col-6 col-md-3 mb-3 me-5 rounded" style=" background: rgba(43,47,51,255); width:120px;">
+								<h5>TOP 6</h5>
+								<p>{{ stats.top6 }}</p>
+							</div>
+
+						{% endif %}
+						<!-- Agrega más información aquí según sea necesario -->
+					</div>
+				{% else %}
+					<p class="text-white">INFORMATION NOT AVAILABLE</p>
+				{% endif %}
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}

@@ -10,9 +10,11 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class FortniteApiService
 {
     private $httpclient;
-    public function __construct(HttpClientInterface $httpclient)
+    private $apiKey;
+    public function __construct(HttpClientInterface $httpclient, string $apiKey)
     {
         $this->httpclient = $httpclient;
+        $this->apiKey = $apiKey;
     }
     public function getBanners(): array
     {
@@ -78,5 +80,24 @@ class FortniteApiService
         $data = $response->toArray();
         $shop = $data["data"];
         return $shop;
+    }
+    public function getStatsByPlayer(string $name): array
+    {
+        $url = "https://fortnite-api.com/v2/stats/br/v2";
+        $apikey = $this->apiKey;
+        $headers = [
+            'Authorization' => $apikey,
+        ];
+        $response = $this->httpclient->request('GET', $url, [
+            'headers' => $headers,
+            'query' => [
+                'name' => $name,
+                'accountType' => 'epic',
+                'timeWindow' => 'lifetime',
+            ],
+        ]);
+        $data = $response->toArray();
+        $player = $data["data"];
+        return $player;
     }
 }

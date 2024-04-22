@@ -91,4 +91,14 @@ class FortniteController extends AbstractController
             'shops' => $infoShop,
         ]);
     }
+    #[Route('/fortnite/stats/', name: 'app_fortnite_stats')]
+    public function getStatsByPlayer(Request $request): Response
+    {
+        $name = $request->query->get('name');
+
+        $infoPlayer = $this->fortniteApi->getStatsByPlayer($name);
+        return $this->render('fortnite/Player.html.twig', [
+            'player' => $infoPlayer,
+        ]);
+    }
 }
