@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuentas{% endblock %}
+
+{% block body %}
+    <h1>Cuentas</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cuenta.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ cuenta.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Enlace</th>
+                <td>{{ cuenta.enlace }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cuentas_index') }}">back to list</a>
+
+    <a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}">edit</a>
+
+    {{ include('cuentas/_delete_form.html.twig') }}
+{% endblock %}

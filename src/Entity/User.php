@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,6 +32,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\OneToMany(targetEntity: Cuentas::class, mappedBy: 'Usuario', orphanRemoval: true)]
+    private Collection $cuentas;
+
+    public function __construct()
+    {
+        $this->cuentas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,5 +114,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Cuentas>
+     */
+    public function getCuentas(): Collection
+    {
+        return $this->cuentas;
+    }
+
+    public function addCuenta(Cuentas $cuenta): static
+    {
+        if (!$this->cuentas->contains($cuenta)) {
+            $this->cuentas->add($cuenta);
+            $cuenta->setUsuario($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCuenta(Cuentas $cuenta): static
+    {
+        if ($this->cuentas->removeElement($cuenta)) {
+            // set the owning side to null (unless already changed)
+            if ($cuenta->getUsuario() === $this) {
+                $cuenta->setUsuario(null);
+            }
+        }
+
+        return $this;
     }
 }

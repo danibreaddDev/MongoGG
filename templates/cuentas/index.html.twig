@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cuentas index{% endblock %}
+
+{% block body %}
+    <h1>Cuentas index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Enlace</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cuenta in cuentas %}
+            <tr>
+                <td>{{ cuenta.id }}</td>
+                <td>{{ cuenta.nombre }}</td>
+                <td>{{ cuenta.enlace }}</td>
+                <td>
+                    <a href="{{ path('app_cuentas_show', {'id': cuenta.id}) }}">show</a>
+                    <a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cuentas_new') }}">Create new</a>
+{% endblock %}
