@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CuentasRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CuentasRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Cuentas
 {
     #[ORM\Id]
@@ -22,6 +24,14 @@ class Cuentas
     #[ORM\ManyToOne(inversedBy: 'cuentas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $Usuario = null;
+    
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $creadoEn = null;
+    #[ORM\PrePersist]
+    public function setValoresCreadoEn()
+    {
+        $this->creadoEn = new \DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,18 @@ class Cuentas
     public function setUsuario(?User $Usuario): static
     {
         $this->Usuario = $Usuario;
+
+        return $this;
+    }
+
+    public function getCreadoEn(): ?\DateTimeInterface
+    {
+        return $this->creadoEn;
+    }
+
+    public function setCreadoEn(?\DateTimeInterface $creadoEn): static
+    {
+        $this->creadoEn = $creadoEn;
 
         return $this;
     }
