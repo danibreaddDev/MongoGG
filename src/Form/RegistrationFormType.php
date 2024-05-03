@@ -23,7 +23,7 @@ class RegistrationFormType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'EMAIL',
-                    'attr' => ['class' => 'mt-2 mb-2 ms-2 text-white text-center'],
+                    'attr' => ['class' => 'mt-2 mb-2 ms-2 text-center'],
                 ]
             )
             ->add('agreeTerms', CheckboxType::class, [
@@ -39,7 +39,7 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password','class'=>'mt-2 mb-2 ms-2 text-white text-center'],
+                'attr' => ['autocomplete' => 'new-password','class'=>'mt-2 mb-2 ms-2 text-center'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',

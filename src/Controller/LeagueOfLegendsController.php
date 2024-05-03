@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class LeagueOfLegendsController extends AbstractController
 {
     private $LolApi;
+    private $id;
+    private $tag;
     public function __construct(LolApiService $LolApi)
     {
         $this->LolApi = $LolApi;
@@ -62,13 +64,14 @@ class LeagueOfLegendsController extends AbstractController
             'tablaclasificaciones' => $infoClasificaciones,
         ]);
     }
-    #[Route('/leagueoflegends/summonername/', name: 'app_league_of_legends_summonername')]
-    public function getInfoSummoner(Request $request): Response
+    #[Route('/leagueoflegends/summonername/{nombre}&{tag}', name: 'app_league_of_legends_summonername')]
+    public function getInfoSummoner(Request $request, $nombre,$tag): Response
     {
-        $name = $request->query->get('name');
-        $tag = $request->query->get('tag');
-        $this->LolApi->setName($name);
+        $this->LolApi->setName($nombre);
         $this->LolApi->setTag($tag);
+        $this->id = $this->LolApi->getName();
+        $this->tag = $this->LolApi->getTag();
+
         //me interesa queueType, tier, rank, summonername, leaguePoints, wins, losses.
         $infoSummoner = $this->LolApi->getInfoSummoners($this->LolApi->getName(), $this->LolApi->getTag());
 
@@ -78,12 +81,11 @@ class LeagueOfLegendsController extends AbstractController
         ]);
     }
     #[Route('/leagueoflegends/partidas/{name}&{tag}', name: 'app_league_of_legends_partidas')]
-    public function getInfoPartida(string $name, string $tag): Response
+    public function getInfoPartida($name,$tag): Response
     {
         $this->LolApi->setName($name);
         $this->LolApi->setTag($tag);
         $infoPartidas = $this->LolApi->getPartidas($this->LolApi->getName(), $this->LolApi->getTag());
-
         //recuperar la info
         return $this->render('league_of_legends/Partidas.html.twig', [
             'partidas' => $infoPartidas,

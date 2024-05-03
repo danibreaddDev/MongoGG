@@ -85,17 +85,15 @@ class FortniteController extends AbstractController
     #[Route('/fortnite/shop', name: 'app_fortnite_shop')]
     public function getShop(): Response
     {
-
         $infoShop = $this->fortniteApi->getShop();
         return $this->render('fortnite/Shop.html.twig', [
             'shops' => $infoShop,
         ]);
     }
-    #[Route('/fortnite/stats/', name: 'app_fortnite_stats')]
-    public function getStatsByPlayer(Request $request): Response
+    #[Route('/fortnite/stats/{nombre}', name: 'app_fortnite_stats')]
+    public function getStatsByPlayer(Request $request,$nombre): Response
     {
-        $name = $request->query->get('name');
-
+        $name = $nombre;    
         $infoPlayer = $this->fortniteApi->getStatsByPlayer($name);
         return $this->render('fortnite/Player.html.twig', [
             'player' => $infoPlayer,

@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% include 'comunes/Modal_Carga.html.twig' %}
+	{% include 'comunes/Modal_Carga.html.twig' %}
 	<div class="container mt-5 pt-5 justify-content-between">
 		<div class="mt-5 pt-5">
 			<h1 class="mt-5 pt-5">Find your user</h1>
@@ -17,27 +17,30 @@
 {% endblock %}
 {% block javascripts %}
 	<script>
-	function mostrarModalCarga() {
-            $('#loadingModal').modal('show'); // Mostrar el modal de carga
-        }
 
-        function ocultarModalCarga() {
-            $('#loadingModal').modal('hide'); // Ocultar el modal de carga
-        }
-		document.getElementById('search-form').addEventListener('submit', function (event) {
+		function mostrarModalCarga() {
+$('#loadingModal').modal('show'); // Mostrar el modal de carga
+}
+
+function ocultarModalCarga() {
+$('#loadingModal').modal('hide'); // Ocultar el modal de carga
+}
+document.getElementById('search-form').addEventListener('submit', function (event) {
+var nombre = document.getElementById('name').value;
 event.preventDefault();
 
 
 // Obtener los valores seleccionados del formulario
 var formData = new FormData(this);
 
-if (formData.get('name') === ""){
+if (formData.get('name') === "") {
 alert('Por favor ingresa un nombre');
 window.location.href = window.location.href;
 return;
 }
 mostrarModalCarga();
-var url = '{{ path('app_fortnite_stats') }}?' + new URLSearchParams(formData).toString();
+var url = '{{ path('app_fortnite_stats', {'nombre': 'VALUE'}) }}'.replace('VALUE', nombre);
+
 
 // Redirigir a la URL
 ocultarModalCarga();

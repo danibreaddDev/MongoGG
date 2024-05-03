@@ -17,19 +17,19 @@ class Cuentas
 
     #[ORM\Column(length: 255)]
     private ?string $nombre = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $enlace = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Tag = null;
 
     #[ORM\ManyToOne(inversedBy: 'cuentas')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $Usuario = null;
-    
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $creadoEn = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Juego = null;
+
+    
     #[ORM\PrePersist]
     public function setValoresCreadoEn()
     {
@@ -49,18 +49,6 @@ class Cuentas
     public function setNombre(string $nombre): static
     {
         $this->nombre = $nombre;
-
-        return $this;
-    }
-
-    public function getEnlace(): ?string
-    {
-        return $this->enlace;
-    }
-
-    public function setEnlace(string $enlace): static
-    {
-        $this->enlace = $enlace;
 
         return $this;
     }
@@ -97,6 +85,18 @@ class Cuentas
     public function setJuego(?string $Juego): static
     {
         $this->Juego = $Juego;
+
+        return $this;
+    }
+
+    public function getTag(): ?string
+    {
+        return $this->Tag;
+    }
+
+    public function setTag(?string $Tag): static
+    {
+        $this->Tag = $Tag;
 
         return $this;
     }

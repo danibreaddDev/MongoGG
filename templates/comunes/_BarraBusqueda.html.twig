@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block body %}
-{% include 'comunes/Modal_Carga.html.twig' %}
+	{% include 'comunes/Modal_Carga.html.twig' %}
 	<div class="container mt-5 pt-5 justify-content-between">
 		<div class="mt-5 pt-5">
 			<h1 class="mt-5 pt-5">Find your summoner name</h1>
@@ -18,14 +18,16 @@
 {% endblock %}
 {% block javascripts %}
 	<script>
-	function mostrarModalCarga() {
-            $('#loadingModal').modal('show'); // Mostrar el modal de carga
-        }
+		function mostrarModalCarga() {
+$('#loadingModal').modal('show'); // Mostrar el modal de carga
+}
 
-        function ocultarModalCarga() {
-            $('#loadingModal').modal('hide'); // Ocultar el modal de carga
-        }
-		document.getElementById('search-form').addEventListener('submit', function (event) {
+function ocultarModalCarga() {
+$('#loadingModal').modal('hide'); // Ocultar el modal de carga
+}
+document.getElementById('search-form').addEventListener('submit', function (event) {
+var nombre = document.getElementById('name').value;
+var tag = document.getElementById('tag').value;
 event.preventDefault();
 
 
@@ -37,9 +39,8 @@ alert('Por favor ingresa un riot id y tag');
 window.location.href = window.location.href;
 return;
 }
-mostrarModalCarga();
-var url = '{{ path('app_league_of_legends_summonername') }}?' + new URLSearchParams(formData).toString();
-
+mostrarModalCarga();	
+var url = '{{ path('app_league_of_legends_summonername', {'nombre': 'VALUE', 'tag': 'TAG_VALUE'}) }}'.replace('VALUE', nombre).replace('TAG_VALUE', tag);
 // Redirigir a la URL
 ocultarModalCarga();
 window.location.href = url;

@@ -13,8 +13,8 @@ class CuentasFixtures extends Fixture implements DependentFixtureInterface
     {
         for ($i = 0; $i < 30; $i++) {
             $cuenta = new Cuentas();
-            $cuenta->setNombre("no t ho mereixes #mongo");
-            $cuenta->setEnlace("prueba");
+            $cuenta->setNombre("no t ho mereixes");
+            $cuenta->setTag("mongo");
             $cuenta->setValoresCreadoEn();  
             $cuenta->setUsuario($this->getReference(UserFixtures::USUARIO_ADMIN_REFERENCIA));
             $cuenta->setJuego("Valorant");

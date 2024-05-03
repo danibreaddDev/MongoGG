@@ -4,104 +4,94 @@
 
 {% block body %}
 
-    <div class="container">
-        <a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
-    </div>
-    <div class="container mt-5">
-        <table class="table table-dark table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Tipo de Clasificatorias</th>
-                    <th scope="col">Tier</th>
-                    <th scope="col">Rango</th>
-                    <th scope="col">Puntos de Liga</th>
-                    <th scope="col">Victorias</th>
-                    <th scope="col">Derrotas</th>
-                    <th scope="col">Porcentaje de Victoria</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if summoner is iterable %}
-                    {% for key, summon in summoner %}
-                        {% if key == 0 or key == 1 and summoner[key] is defined and attribute(summoner[key], 'queueType') is defined %}
-                            <tr>
-                                <td>{{ summon["queueType"] }}</td>
-                                <td>{{ summon["tier"] }}</td>
-                                <td>{{ summon["rank"] }}</td>
-                                <td>{{ summon["leaguePoints"] }}</td>
-                                <td>{{ summon["wins"] }}</td>
-                                <td>{{ summon["losses"] }}</td>
-                                {% set win_percentage = (summon["wins"] / (summon["wins"] + summon["losses"])) * 100 %}
-                                {# Mostrar el porcentaje redondeado #}
-                                <td>{{ win_percentage | round(0, 'floor') }}%</td>
-                            </tr>
-                        {% endif %}
-                    {% else %}
-                        <p>No hay Info para ranked</p>
-                    {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
-    <div class="d-flex justify-content-center">
-        <button type="button" id="submitButton" class="btn btn-primary">Ver Últimas Partidas</button>
-    </div>
-    {% include 'comunes/Modal_Carga.html.twig' %}
-    <div id="contentContainer"></div>
+	<div class="container">
+		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
+	</div>
+	<div class="container mt-5">
+		<table class="table table-dark table-bordered">
+			<thead>
+				<tr>
+					<th scope="col">Tipo de Clasificatorias</th>
+					<th scope="col">Tier</th>
+					<th scope="col">Rango</th>
+					<th scope="col">Puntos de Liga</th>
+					<th scope="col">Victorias</th>
+					<th scope="col">Derrotas</th>
+					<th scope="col">Porcentaje de Victoria</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if summoner is iterable %}
+					{% for key, summon in summoner %}
+						{% if key == 0 or key == 1 and summoner[key] is defined and attribute(summoner[key], 'queueType') is defined %}
+							<tr>
+								<td>{{ summon["queueType"] }}</td>
+								<td>{{ summon["tier"] }}</td>
+								<td>{{ summon["rank"] }}</td>
+								<td>{{ summon["leaguePoints"] }}</td>
+								<td>{{ summon["wins"] }}</td>
+								<td>{{ summon["losses"] }}</td>
+								{% set win_percentage = (summon["wins"] / (summon["wins"] + summon["losses"])) * 100 %}
+								{# Mostrar el porcentaje redondeado #}
+								<td>{{ win_percentage | round(0, 'floor') }}%</td>
+							</tr>
+						{% endif %}
+					{% else %}
+						<p>No hay Info para ranked</p>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+	</div>
+	<div class="d-flex justify-content-center">
+		<button type="button" id="submitButton" class="btn btn-primary">Ver Últimas Partidas</button>
+	</div>
+	{% include 'comunes/Modal_Carga.html.twig' %}
+	<div id="contentContainer"></div>
 {% endblock %}
 
 {% block javascripts %}
-    <script>
-        document.getElementById('submitButton').addEventListener('click', function () {
-            var rutaSymfony = obtenerNombreYTagDesdeURLActual();
-            console.log("Ruta de Symfony: " + rutaSymfony);
-			mostrarModalCarga();
-            cargarContenidoDesdeRuta(rutaSymfony);
-        });
+	<script>
+		document.getElementById('submitButton').addEventListener('click', function () {
+var rutaSymfony = obtenerNombreYTagDesdeURLActual();
+console.log("Ruta de Symfony: " + rutaSymfony);
+mostrarModalCarga();
+cargarContenidoDesdeRuta(rutaSymfony);
+});
 
-        function obtenerNombreYTagDesdeURLActual() {
-            var url = window.location.href;
-            url = url.replace(/\+/g, ' ');
+function obtenerNombreYTagDesdeURLActual() {
+var url = window.location.href;
 
-            var queryString = url.split('?')[1];
+// Obtener el pathname (parte de la URL después del dominio)
+var pathname = new URL(url).pathname;
+var partesPathname = pathname.split('/');
+var nameandtag = partesPathname[3];
+var rutaSymfony = '/leagueoflegends/partidas/' + nameandtag;
+return rutaSymfony;
+}
+function mostrarModalCarga() {
+$('#loadingModal').modal('show'); // Mostrar el modal de carga
+}
 
-            var queryParams = queryString.split('&');
+function ocultarModalCarga() {
+$('#loadingModal').modal('hide'); // Ocultar el modal de carga
+}
 
-            var parametros = {};
-
-            queryParams.forEach(function (param) {
-                var partes = param.split('=');
-                parametros[partes[0]] = decodeURIComponent(partes[1]);
-            });
-
-            var rutaSymfony = '/leagueoflegends/partidas/' + parametros['name'] + '&' + parametros['tag'];
-            return rutaSymfony;
-        }
-		function mostrarModalCarga() {
-            $('#loadingModal').modal('show'); // Mostrar el modal de carga
-        }
-
-        function ocultarModalCarga() {
-            $('#loadingModal').modal('hide'); // Ocultar el modal de carga
-        }
-
-        function cargarContenidoDesdeRuta(ruta) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                    if (xhr.status === 200) {
-                        var container = document.getElementById('contentContainer');
-                        container.innerHTML = xhr.responseText;
-						ocultarModalCarga();
-                    } else {
-                        console.error('Error al cargar la página: ' + xhr.status);
-                    }
-                }
-            };
-            xhr.open('GET', ruta, true);
-            xhr.send();
-        }
-    </script>
+function cargarContenidoDesdeRuta(ruta) {
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+if (xhr.readyState === XMLHttpRequest.DONE) {
+if (xhr.status === 200) {
+var container = document.getElementById('contentContainer');
+container.innerHTML = xhr.responseText;
+ocultarModalCarga();
+} else {
+console.error('Error al cargar la página: ' + xhr.status);
+}
+}
+};
+xhr.open('GET', ruta, true);
+xhr.send();
+}
+	</script>
 {% endblock %}
-
-

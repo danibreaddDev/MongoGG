@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/cuentas')]
 class CuentasController extends AbstractController
 {
-    const ELEMENTOS_POR_PAGINA = 10;
+    const ELEMENTOS_POR_PAGINA = 3;
     #[Route('/{pagina}', name: 'app_cuentas_index', defaults: ['pagina' => 1], requirements: ['pagina' => '\d+'], methods: ['GET'])]
     public function index(int $pagina,CuentasRepository $cuentasRepository): Response
     {

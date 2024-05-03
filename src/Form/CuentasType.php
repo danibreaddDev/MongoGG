@@ -4,14 +4,12 @@ namespace App\Form;
 
 use App\Entity\Cuentas;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormEvent;
 
 class CuentasType extends AbstractType
@@ -30,7 +28,17 @@ class CuentasType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'NAME',
-                    'attr' => ['class' => 'mt-2 mb-2 ms-5 text-white text-center'],
+                    'attr' => ['class' => 'mt-2 mb-2 ms-5 text-center'],
+                    
+                ]
+            )
+            ->add(
+                'tag',
+                TextType::class,
+                [
+                    'label' => 'TAG',
+                    'attr' => ['class' => 'mt-2 mb-2 ms-5 text-center'],
+                    'required'=>false,
                 ]
             )
             ->add('juego', ChoiceType::class, [
@@ -41,16 +49,7 @@ class CuentasType extends AbstractType
                 ],
                 'attr' => ['class' => 'mt-2 mb-2 ms-5 text-center'],
 
-            ])
-            ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
-                $form = $event->getForm();
-                $entity = $form->getData();
-                if ($entity instanceof Cuentas && $entity->getNombre() && $entity->getJuego()) {
-                    $enlace = $this->construirEnlace($entity->getNombre(), $entity->getJuego());
-
-                    $entity->setEnlace($enlace);
-                }
-            });
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -58,20 +57,5 @@ class CuentasType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Cuentas::class,
         ]);
-    }
-    private function construirEnlace(string $nombre, string $juego): string
-    {
-        if ($juego == "LeagueOfLegends") {
-            $nombre = explode("#", $nombre);
-            $ruta = $this->router->generate('app_league_of_legends_summonername', [
-                'name' => $nombre[0],
-                'tag' => $nombre[1],
-            ]);
-        } else {
-            $ruta = $this->router->generate('app_fortnite_stats', [
-                'name' => $nombre,
-            ]);
-        }
-        return $ruta;
     }
 }
