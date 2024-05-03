@@ -29,7 +29,8 @@ class CuentasType extends AbstractType
                 'nombre',
                 TextType::class,
                 [
-                    'label' => 'GAME'
+                    'label' => 'NAME',
+                    'attr' => ['class' => 'mt-2 mb-2 ms-5 text-white text-center'],
                 ]
             )
             ->add('juego', ChoiceType::class, [
@@ -38,6 +39,8 @@ class CuentasType extends AbstractType
                     'League Of Legends' => 'LeagueOfLegends',
                     'Fortnite' => 'Fortnite',
                 ],
+                'attr' => ['class' => 'mt-2 mb-2 ms-5 text-center'],
+
             ])
             ->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) {
                 $form = $event->getForm();

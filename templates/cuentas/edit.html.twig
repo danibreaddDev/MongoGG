@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Cuentas{% endblock %}
+{% block title %}Edit ACCOUNTS
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Cuentas</h1>
+	<div class="container text-center alert alert-primary" role="alert" style="padding: 8px;">
+		<strong style="font-size: 20px;">IMPORTANT! </strong>
+		<strong style="font-size: 12px;"> LEAGUE OF LEGENDS ACCOUNT FORMAT (NAME#TAG)</strong>
+	</div>
+	<div class="container pt-5 mt-5 text-center text-white">
+		<h1>Edit Account</h1>
 
-    {{ include('cuentas/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_cuentas_index') }}">back to list</a>
-
-    {{ include('cuentas/_delete_form.html.twig') }}
+		{{ include('cuentas/_form.html.twig', {'button_label': 'Update'}) }}
+		{{ include('cuentas/_delete_form.html.twig') }}
+        <a href="{{ path('app_cuentas_index') }}" class="btn btn-secondary mt-2">Back to Accounts</a>
+	</div>
 {% endblock %}

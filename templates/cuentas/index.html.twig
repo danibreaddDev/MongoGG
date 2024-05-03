@@ -26,7 +26,7 @@
 						</td>
 						<td>{{ cuenta.juego }}</td>
 						<td>
-							<a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+							<a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}" class="btn btn-secondary btn-sm">Edit Account</a>
 						</td>
 					</tr>
 				{% else %}
@@ -49,7 +49,7 @@
             )
         }}
 		</div>
-		<a href="{{ path('app_cuentas_new') }}" class="btn btn-success">Create New</a>
+		<a href="{{ path('app_cuentas_new') }}" class="btn btn-success">Add New Account</a>
 
 	</div>
 {% endblock %}

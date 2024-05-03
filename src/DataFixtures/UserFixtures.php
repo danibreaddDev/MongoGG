@@ -19,7 +19,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $usuario = new User();
-        $usuario->setEmail("admin@admin.com");
+        $usuario->setEmail("admin@mongoGG.com");
         $usuario->setRoles(['ROLE_ADMIN']);
         $contraseña = $this->hasher->hashPassword($usuario, 'admin');
         $usuario->setPassword($contraseña);
