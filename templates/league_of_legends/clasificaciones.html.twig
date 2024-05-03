@@ -8,11 +8,12 @@
 		<a class="btn btn-primary bg-dark mt-5" href="{{ path('app_league_of_legends') }}">Return</a>
 	</div>
 	<div class="container mt-5">
+	<h1 class="text-center text-white mb-5">TIER RANK</h1>
 		<form id="search-form" method="GET" action="{{ path('app_league_of_legends_clasificaciones_filtradas') }}">
 			<div class="row justify-content-center">
 				<div class="col-md-4">
 					<select id="tier-select" name="tier-select" class="form-select" aria-label="Campeones">
-						<option selected>Selecciona una tier</option>
+						<option selected>Tier Select</option>
 						<option value="CHALLENGER">Challenger</option>
 						<option value="GRANDMASTER">GranMaster</option>
 						<option value="MASTER">Master</option>
@@ -28,7 +29,7 @@
 				</div>
 				<div class="col-md-4">
 					<select id="division-select" disabled name="division-select" class="form-select" aria-label="Contenedor 1">
-						<option selected>Selecciona una división</option>
+						<option selected>Division Select</option>
 						<option value="I">I</option>
 						<option value="II">II</option>
 						<option value="III">III</option>
@@ -38,7 +39,7 @@
 				</div>
 				<div class="col-md-4">
 					<select id="queue-select" name="queue-select" class="form-select" aria-label="Contenedor 2">
-						<option selected>Selecciona tipo de clasificatoria</option>
+						<option selected>Queue Select</option>
 						<option value="RANKED_SOLO_5x5">Ranked SoloQ</option>
 						<option value="RANKED_FLEX_SR">Ranked Flex 5vs5</option>
 						<!-- Agrega más opciones según sea necesario -->
