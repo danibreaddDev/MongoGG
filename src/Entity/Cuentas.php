@@ -27,6 +27,9 @@ class Cuentas
     
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $creadoEn = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Juego = null;
     #[ORM\PrePersist]
     public function setValoresCreadoEn()
     {
@@ -82,6 +85,18 @@ class Cuentas
     public function setCreadoEn(?\DateTimeInterface $creadoEn): static
     {
         $this->creadoEn = $creadoEn;
+
+        return $this;
+    }
+
+    public function getJuego(): ?string
+    {
+        return $this->Juego;
+    }
+
+    public function setJuego(?string $Juego): static
+    {
+        $this->Juego = $Juego;
 
         return $this;
     }

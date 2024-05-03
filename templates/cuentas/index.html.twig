@@ -11,30 +11,31 @@
 		<h1>ACCOUNTS</h1>
 
 		<table class="table table-dark table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col">Enlace</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cuenta in cuentas %}
-            <tr>
-                <td>{{ cuenta.nombre }}</td>
-                <td>{{ cuenta.enlace }}</td>
-                <td>
-                    <a href="{{ path('app_cuentas_show', {'id': cuenta.id}) }}" class="btn btn-primary btn-sm">Show</a>
-                    <a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">Not accounts founded</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+			<thead>
+				<tr>
+					<th scope="col">Account</th>
+					<th scope="col">Game</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for cuenta in cuentas %}
+					<tr>
+						<td>
+							<a href="{{cuenta.enlace}}">{{ cuenta.nombre }}</a>
+						</td>
+						<td>{{ cuenta.juego }}</td>
+						<td>
+							<a href="{{ path('app_cuentas_edit', {'id': cuenta.id}) }}" class="btn btn-secondary btn-sm">Edit</a>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="4">Not accounts founded</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 
 		<div class="mt-3">
 			{{ 

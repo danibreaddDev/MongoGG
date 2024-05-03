@@ -9,7 +9,7 @@
 		<div class=" ms-5 mt-2 me-5 text-white">
 			<div class="d-flex justify-content-between align-items-center">
 				<div>
-					<span class="fw-bold mt-2">{{ app.user.userIdentifier }}</span>
+					<span class="fw-bold mt-2">{{ app.user.userIdentifier }}-{{app.user.UltimoAcceso|date("d/m/Y")}}</span>
 				</div>
 				<div>
 					{% if is_granted('ROLE_ADMIN') %}

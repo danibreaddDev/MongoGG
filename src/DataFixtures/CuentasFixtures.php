@@ -17,6 +17,7 @@ class CuentasFixtures extends Fixture implements DependentFixtureInterface
             $cuenta->setEnlace("prueba");
             $cuenta->setValoresCreadoEn();  
             $cuenta->setUsuario($this->getReference(UserFixtures::USUARIO_ADMIN_REFERENCIA));
+            $cuenta->setJuego("Valorant");
             $manager->persist($cuenta);
             $manager->flush();
         }

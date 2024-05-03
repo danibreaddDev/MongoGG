@@ -23,6 +23,8 @@ class UserFixtures extends Fixture
         $usuario->setRoles(['ROLE_ADMIN']);
         $contraseña = $this->hasher->hashPassword($usuario, 'admin');
         $usuario->setPassword($contraseña);
+        $usuario->setUltimoAcceso(new \DateTime());
+        $usuario->setIsVerified(true);
         $manager->persist($usuario);
         $manager->flush();
         $this->addReference(self::USUARIO_ADMIN_REFERENCIA, $usuario);
