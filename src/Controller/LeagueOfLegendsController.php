@@ -12,8 +12,6 @@ use Symfony\Component\Routing\Attribute\Route;
 class LeagueOfLegendsController extends AbstractController
 {
     private $LolApi;
-    private $id;
-    private $tag;
     public function __construct(LolApiService $LolApi)
     {
         $this->LolApi = $LolApi;
@@ -65,12 +63,10 @@ class LeagueOfLegendsController extends AbstractController
         ]);
     }
     #[Route('/leagueoflegends/summonername/{nombre}&{tag}', name: 'app_league_of_legends_summonername')]
-    public function getInfoSummoner(Request $request, $nombre,$tag): Response
+    public function getInfoSummoner($nombre,$tag): Response
     {
         $this->LolApi->setName($nombre);
         $this->LolApi->setTag($tag);
-        $this->id = $this->LolApi->getName();
-        $this->tag = $this->LolApi->getTag();
 
         //me interesa queueType, tier, rank, summonername, leaguePoints, wins, losses.
         $infoSummoner = $this->LolApi->getInfoSummoners($this->LolApi->getName(), $this->LolApi->getTag());
